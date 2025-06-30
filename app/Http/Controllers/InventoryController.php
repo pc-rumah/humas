@@ -12,10 +12,16 @@ class InventoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Inventory::all();
-        return view("inventory.index", compact("data"));
+        $query = Inventory::query();
+
+        if ($request->filled('search')) {
+            $query->where('nama_barang', 'like', '%' . $request->search . '%');
+        }
+        $data = $query->paginate(10);
+
+        return view('inventory.index', compact('data'));
     }
 
     /**

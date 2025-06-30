@@ -6,12 +6,20 @@
             <div class="card bg-base-100 shadow">
                 <div class="card-header p-4 border-b border-base-200">
                     <div class="flex flex-col w-full gap-2">
-
                         <div class="flex justify-between items-center">
                             <h2 class="text-lg font-semibold">Daftar Barang</h2>
-                            <a href="{{ route('inventori.create') }}" class="btn btn-primary">Tambah Barang</a>
-                        </div>
+                            <div class="flex items-center space-x-2">
+                                <form action="{{ route('inventori.index') }}" method="GET"
+                                    class="flex items-center space-x-2">
+                                    <input type="text" name="search" placeholder="Cari nama barang..."
+                                        value="{{ request('search') }}" class="input form-control input-sm" />
+                                    <button type="submit" class="btn btn-sm btn-secondary">Cari</button>
+                                    <a href="{{ route('inventori.index') }}" class="btn btn-info btn-sm">Reset</a>
+                                </form>
 
+                                <a href="{{ route('inventori.create') }}" class="btn btn-primary btn-sm">Tambah Barang</a>
+                            </div>
+                        </div>
                         @include('partdash.alert')
                     </div>
                 </div>
@@ -46,7 +54,15 @@
                                     <td>{{ $inventori->kategori->nama_kategori }}</td>
                                     <td>{{ $inventori->jumlah }}</td>
                                     <td>{{ $inventori->lokasi }}</td>
-                                    <td>{{ $inventori->status }}</td>
+                                    <td>
+                                        @if ($inventori->status == 'tersedia')
+                                            <h5 class="text-md text-green-500">{{ ucfirst($inventori->status) }}</h5>
+                                        @elseif ($invetori->status == 'dipinjam')
+                                            <h5 class="text-md text-yellow-500">{{ ucfirst($inventori->status) }}</h5>
+                                        @elseif ($inventori->status == 'rusak')
+                                            <h5 class="text md text-red-500">{{ ucfirst($inventori->status) }}</h5>
+                                        @endif
+                                    </td>
                                     <td class="">
                                         <a href="{{ route('inventori.edit', $inventori->id) }}"
                                             class="btn btn-sm btn-warning">Edit</a>
