@@ -1,34 +1,24 @@
 @extends('dashboard')
 
 @section('content')
-    <div class="grid grid-cols-12 gap-x-6">
-        <div class="col-span-12">
-            <div class="card bg-base-100 shadow">
-                <div class="card-body p-4 overflow-x-auto">
-                    @include('partdash.error')
-                    <form action="{{ route('kategori.store') }}" method="POST" class="space-y-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Tambah Kategori</h5>
+            @include('partdash.error')
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('kategori.store') }}" method="POST">
                         @csrf
-                        <div class="mb-2">
-                            <label for="nama" class="block font-medium mb-1">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" id="nama"
-                                class="input form-control input-bordered w-full" placeholder="Masukkan nama kategori"
-                                required>
-                            @error('nama_kategori')
-                                <p class="text-error text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                        <div class="mb-3">
+                            <label for="nama_kategori" class="form-label">Nama Kategori</label>
+                            <input type="text" name="nama_kategori" class="form-control" id="nama_kategori"
+                                aria-describedby="nama_kategoriHelp">
                         </div>
-                        <div>
-                            <label for="kode" class="block font-medium mb-1">Kode Kategori</label>
-                            <input type="text" name="kode_kategori" id="kode"
-                                class="input form-control input-bordered w-full" placeholder="Masukkan kode kategori"
-                                required>
-                            @error('kode_kategori')
-                                <p class="text-error text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                        <div class="mb-3">
+                            <label for="kode kategori" class="form-label">Kode Kategori</label>
+                            <input type="text" name="kode_kategori" id="kode" class="form-control" required>
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary mt-2">Simpan</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

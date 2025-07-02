@@ -4,8 +4,8 @@
     <div class="grid grid-cols-12 gap-x-6">
         <div class="col-span-12">
             <div class="card bg-base-100 shadow">
-                <h5>Edit Barang</h5>
                 <div class="card-body p-4 overflow-x-auto">
+                    <h5 class="card-title fw-semibold mb-4">Edit Barang</h5>
                     @include('partdash.error')
                     <form action="{{ route('inventori.update', $inventori) }}" method="POST" enctype="multipart/form-data"
                         class="space-y-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">

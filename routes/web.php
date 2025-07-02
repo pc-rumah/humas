@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PeminjamanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +23,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('kategori', KategoriController::class);
     Route::resource('inventori', InventoryController::class);
+});
+
+Route::middleware(['auth', 'role:petugas'])->group(function () {
+    //
+});
+
+Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
+    Route::resource('peminjaman', PeminjamanController::class);
 });
 
 require __DIR__ . '/auth.php';

@@ -37,6 +37,12 @@
                         <span class="pc-mtext">Kategori</span>
                     </a>
                 </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href=" {{ route('peminjaman.index') }} " class="pc-link">
+                        <span class="pc-micon"> <i data-feather="edit"></i></span>
+                        <span class="pc-mtext">Pinjam Barang</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

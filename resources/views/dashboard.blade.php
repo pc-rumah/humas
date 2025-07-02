@@ -1,59 +1,56 @@
 <!doctype html>
-<html lang="en" data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" dir="ltr"
-    data-pc-theme="light">
+<html lang="en">
 
 <head>
-    <title>Home</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <link rel="icon" href="{{ asset('dash/assets/images/favicon.svg') }}" type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('dash/assets/fonts/phosphor/duotone/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dash/assets/fonts/tabler-icons.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dash/assets/fonts/feather.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dash/assets/fonts/fontawesome.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dash/assets/fonts/material.css') }}" />
-    <link rel="stylesheet" href="{{ asset('dash/assets/css/style.css') }}" id="main-style-link" />
-    <style>
-        .animate-fade-in {
-            opacity: 1;
-        }
-
-        .animate-fade-out {
-            opacity: 0;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('dash/assets/images/logos/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('dash/assets/css/styles.min.css') }}" />
 </head>
 
 <body>
-    <div class="loader-bg fixed inset-0 bg-white dark:bg-themedark-cardbg z-[1034]">
-        <div class="loader-track h-[5px] w-full inline-block absolute overflow-hidden top-0">
-            <div
-                class="loader-fill w-[300px] h-[5px] bg-primary-500 absolute top-0 left-0 animate-[hitZak_0.6s_ease-in-out_infinite_alternate]">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+
+        @include('partdash.sidebar')
+
+        <div class="body-wrapper">
+            @include('partdash.header')
+            <div class="container-fluid">
+                @yield('content')
             </div>
         </div>
     </div>
+    <script src="{{ asset('dash/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('dash/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dash/assets/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('dash/assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('dash/assets/libs/simplebar/dist/simplebar.js') }}"></script>
+    <script src="{{ asset('dash/assets/js/dashboard.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll(
+                'button[data-bs-toggle="modal"][data-bs-target="#alert-hapus"]');
+            const deleteForm = document.getElementById('form-delete');
 
-    {{-- navbar --}}
-    @include('partdash.navbar')
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const url = button.getAttribute('data-url');
+                    deleteForm.setAttribute('action', url);
+                });
+            });
+        });
 
-    {{-- header --}}
-    @include('partdash.header')
+        $(document).ready(function() {
+            $('#alert-sukses, #alert-error, #alert-error-list').hide().fadeIn(500);
 
-    {{-- konten --}}
-    <div class="pc-container">
-        <div class="pc-content">
+            setTimeout(function() {
+                $('#alert-sukses, #alert-error, #alert-error-list').fadeOut(500);
+            }, 5000); // 5 detik
+        });
+    </script>
 
-            @yield('content')
-
-        </div>
-    </div>
-
-    {{-- asset js --}}
-    @include('partdash.js')
 </body>
 
 </html>

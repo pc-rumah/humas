@@ -1,89 +1,95 @@
 @extends('dashboard')
 
 @section('content')
-    <div class="grid grid-cols-12 gap-x-6">
-        <div class="col-span-12">
-            <div class="card bg-base-100 shadow">
-                <div class="card-header p-4 border-b border-base-200">
-                    <div class="flex flex-col w-full gap-2">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-lg font-semibold">Daftar Barang</h2>
-                            <div class="flex items-center space-x-2">
-                                <form action="{{ route('inventori.index') }}" method="GET"
-                                    class="flex items-center space-x-2">
-                                    <input type="text" name="search" placeholder="Cari nama barang..."
-                                        value="{{ request('search') }}" class="input form-control input-sm" />
-                                    <button type="submit" class="btn btn-sm btn-secondary">Cari</button>
-                                    <a href="{{ route('inventori.index') }}" class="btn btn-info btn-sm">Reset</a>
-                                </form>
-
-                                <a href="{{ route('inventori.create') }}" class="btn btn-primary btn-sm">Tambah Barang</a>
-                            </div>
-                        </div>
-                        @include('partdash.alert')
-                    </div>
-                </div>
-
-                <div class="card-body p-4 overflow-x-auto">
-                    <table class="table w-full table-zebra">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Gambar Barang</th>
-                                <th>Kategori</th>
-                                <th>Jumlah</th>
-                                <th>Lokasi</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($data as $index => $inventori)
+    <div class="card w-100">
+        <div class="card-body p-4">
+            <a class="btn btn-primary m-1" href="{{ route('inventori.create') }}">Tambah Kategori</a>
+            @include('partdash.alert')
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">#</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Kode Barang</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Nama Barang</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Gambar Barang</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Kategori</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Jumlah</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Lokasi</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Status</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Aksi</h6>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ($data->isEmpty())
+                            <td class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Belum ada data</h6>
+                            </td>
+                        @else
+                            @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $inventori->kode_barang }}</td>
-                                    <td>{{ $inventori->nama_barang }}</td>
-                                    <td class="flex items-center">
-                                        @if (isset($inventori->gambar_barang))
-                                            <img src="{{ asset('storage/' . $inventori->gambar_barang) }}"
-                                                alt="gambar barang" class="w-20 h-20 object-cover rounded" />
-                                        @endif
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">{{ $loop->iteration }}</h6>
                                     </td>
-                                    <td>{{ $inventori->kategori->nama_kategori }}</td>
-                                    <td>{{ $inventori->jumlah }}</td>
-                                    <td>{{ $inventori->lokasi }}</td>
-                                    <td>
-                                        @if ($inventori->status == 'tersedia')
-                                            <h5 class="text-md text-green-500">{{ ucfirst($inventori->status) }}</h5>
-                                        @elseif ($invetori->status == 'dipinjam')
-                                            <h5 class="text-md text-yellow-500">{{ ucfirst($inventori->status) }}</h5>
-                                        @elseif ($inventori->status == 'rusak')
-                                            <h5 class="text md text-red-500">{{ ucfirst($inventori->status) }}</h5>
-                                        @endif
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-1">{{ $item->kode_barang }}</h6>
                                     </td>
-                                    <td class="">
-                                        <a href="{{ route('inventori.edit', $inventori->id) }}"
-                                            class="btn btn-sm btn-warning">Edit</a>
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-1">{{ $item->nama_barang }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0 d-flex align-items-center">
+                                        @isset($item->gambar_barang)
+                                            <img style="width: 80px; height: auto; margin-right: 10px;"
+                                                src="{{ asset('storage/' . $item->gambar_barang) }}" alt="gambar barang">
+                                        @endisset
+                                    </td>
+                                    <td class="border-bottom-0 align-middle">
+                                        <h6 class="fw-semibold mb-1">{{ $item->kategori->nama_kategori }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-1">{{ $item->jumlah }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-1">{{ $item->lokasi }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-1">{{ $item->status }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ route('inventori.edit', $item) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
 
-                                        <button class="btn btn-sm btn-danger btn-delete"
-                                            data-url="{{ route('inventori.destroy', $inventori->id) }}"
-                                            data-message="Yakin ingin menghapus data ini?">
-                                            Hapus
-                                        </button>
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-url="{{ route('inventori.destroy', $item->id) }}"
+                                                data-bs-target="#alert-hapus">Hapus</button>
+                                        </div>
 
                                         @include('partdash.modal')
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="text-center">Belum ada Data.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
