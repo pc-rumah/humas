@@ -5,15 +5,44 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\PeminjamanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PeminjamanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function home()
     {
-        $data = Peminjaman::with(['inventori', 'user'])->latest()->paginate(10);
+        $peminjaman = Peminjaman::all();
+        return view('welpage.peminjaman', compact('peminjaman'));
+    }
+
+    public function index(Request $request)
+    {
+        $query = Peminjaman::with(['inventori', 'user'])->latest();
+
+        // Filter status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Filter tanggal pinjam
+        if ($request->filled('from') && $request->filled('to')) {
+            $query->whereBetween('tanggal_pinjam', [$request->from, $request->to]);
+        }
+
+        // Filter nama barang
+        if ($request->filled('barang')) {
+            $query->whereHas('inventori', function ($q) use ($request) {
+                $q->where('nama_barang', 'like', '%' . $request->barang . '%');
+            });
+        }
+
+        $data = $query->paginate(10)->withQueryString();
+
         return view('peminjaman.index', compact('data'));
     }
 
@@ -108,5 +137,19 @@ class PeminjamanController extends Controller
         $peminjaman->delete();
 
         return redirect()->route('peminjaman.index')->with('success', 'Data peminjaman berhasil dihapus.');
+    }
+
+    public function exportPDF()
+    {
+        $peminjaman = Peminjaman::all();
+
+        $pdf = Pdf::loadView('pdf.peminjaman', compact('peminjaman'));
+
+        return $pdf->download('laporan-peminjaman.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PeminjamanExport, 'laporan-peminjaman.xlsx');
     }
 }

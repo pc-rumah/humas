@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class InventoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function home()
+    {
+        $inventori = Inventory::all();
+        $kategori = Kategori::all();
+        return view('welpage.inventori', compact('inventori', 'kategori'));
+    }
+
     public function index(Request $request)
     {
         $query = Inventory::query();
