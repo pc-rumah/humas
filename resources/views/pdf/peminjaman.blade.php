@@ -43,7 +43,7 @@
             @foreach ($peminjaman as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->user->name }}</td>
+                    <td>{{ $item->nama_peminjam }}</td>
                     <td>{{ $item->inventori->nama_barang }}</td>
                     <td>{{ $item->tanggal_pinjam }}</td>
                     <td>{{ $item->tanggal_kembali }}</td>

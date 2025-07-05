@@ -25,6 +25,10 @@
                                         accept="image/*">
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea name="deskripsi" id="" cols="5" rows="5" class="form-control">{{ old('deskripsi') }}</textarea>
+                                </div>
+                                <div class="mb-3">
                                     <label for="kategori" class="form-label">Kategori</label>
                                     <select name="kategori_id" id="kategori" class="form-control" required>
                                         <option value="" disabled {{ old('kategori') == '' ? 'selected' : '' }}>Pilih

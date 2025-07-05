@@ -28,22 +28,17 @@ class InventoryController extends Controller
         return view('inventory.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $kategori = Kategori::all();
         return view("inventory.create", compact("kategori"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nama_barang'   => 'required',
+            'deskripsi'     => 'nullable|string',
             'kategori_id'   => 'required|exists:kategori,id',
             'jumlah'        => 'required|integer|min:0',
             'lokasi'        => 'nullable',
@@ -66,17 +61,11 @@ class InventoryController extends Controller
         return redirect()->route('inventori.index')->with('success', 'Barang berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Inventory $inventory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Inventory $inventori)
     {
         $kategori = Kategori::all();
@@ -87,6 +76,7 @@ class InventoryController extends Controller
     {
         $validated = $request->validate([
             'nama_barang' => 'required',
+            'deskripsi' => 'nullable|string',
             'kategori_id' => 'required|exists:kategori,id',
             'jumlah' => 'required|integer|min:0',
             'lokasi' => 'nullable',
@@ -100,7 +90,6 @@ class InventoryController extends Controller
             }
             $validated['gambar_barang'] = $request->file('gambar_barang')->store('inventori', 'public');
         }
-        // dd($validated);
         $inventori->update($validated);
 
         return redirect()->route('inventori.index')->with('success', 'Berhasil Mengupdate Data');
@@ -108,7 +97,6 @@ class InventoryController extends Controller
 
     public function destroy(Inventory $inventori)
     {
-        // dd($inventory);
         if ($inventori->gambar_barang && Storage::disk('public')->exists($inventori->gambar_barang)) {
             Storage::disk('public')->delete($inventori->gambar_barang);
         }

@@ -24,46 +24,75 @@
             <div class="borrowing-content">
                 <!-- Request Item Form -->
                 <div class="request-form-container">
+                    {{-- Pesan Success --}}
+                    @if (session('success'))
+                        <div class="alert alert-success fade-message">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    {{-- Pesan Error --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger fade-message">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <h2>Request Item</h2>
-                    <form class="request-form" id="requestForm">
+                    <form action="{{ route('peminjaman.storeUser') }}" class="request-form" method="POST"
+                        id="requestForm">
+                        @csrf
+
                         <div class="form-group">
-                            <label for="itemName">Item Name</label>
-                            <select id="itemName" class="form-select" required>
-                                <option value="">Select an item</option>
-                                <option value="Laptop Dell Inspiron">Laptop Dell Inspiron</option>
-                                <option value="Projector Epson">Projector Epson</option>
-                                <option value="Office Chair">Office Chair</option>
-                                <option value="Microphone Set">Microphone Set</option>
-                                <option value="Whiteboard">Whiteboard</option>
-                                <option value="Camera Canon">Camera Canon</option>
+                            <label for="nama_peminjam">Nama Peminjam</label>
+                            <input type="text" name="nama_peminjam" id="nama_peminjam" class="form-input"
+                                placeholder="Nama Peminjam" value="{{ old('nama_peminjam') }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inventori_id">Nama Barang</label>
+                            <select name="inventori_id" id="inventori_id" class="form-select" required>
+                                <option value="" disabled {{ old('inventori_id') ? '' : 'selected' }}>Pilih Barang
+                                </option>
+                                @foreach ($inventori as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('inventori_id') == $item->id ? 'selected' : '' }}>
+                                        {{ $item->nama_barang }} (Stok = {{ $item->jumlah }})
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="quantity">Quantity</label>
-                            <input type="number" id="quantity" class="form-input" min="1" max="10"
-                                value="1" required>
+                            <label for="tanggal_pinjam">Tanggal Pinjam</label>
+                            <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" class="form-input"
+                                value="{{ old('tanggal_pinjam') }}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="borrowDate">Borrow Date</label>
-                            <input type="date" id="borrowDate" class="form-input" required>
+                            <label for="tanggal_kembali">Tanggal Kembali</label>
+                            <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-input"
+                                value="{{ old('tanggal_kembali') }}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="returnDate">Return Date</label>
-                            <input type="date" id="returnDate" class="form-input" required>
+                            <label for="jumlah">Jumlah Pinjam</label>
+                            <input type="number" name="jumlah_pinjam" id="jumlah" min="1" class="form-input"
+                                value="{{ old('jumlah_pinjam') }}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="purpose">Purpose</label>
-                            <textarea id="purpose" class="form-textarea" placeholder="Please describe the purpose of borrowing..." rows="4"
-                                required></textarea>
+                            <label for="tujuan">Tujuan</label>
+                            <textarea name="tujuan" id="tujuan" class="form-textarea" rows="4" required>{{ old('tujuan') }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary submit-btn">Submit Request</button>
                     </form>
                 </div>
+
                 @php
                     function getStatusIcon($status)
                     {
@@ -77,7 +106,6 @@
                     }
                 @endphp
 
-                <!-- Request History -->
                 <div class="history-container">
                     <h2>Request History</h2>
                     <div class="history-list">
@@ -96,7 +124,7 @@
                                 </div>
                                 <div class="history-item-details">
                                     <div class="history-item-quantity">Quantity: {{ $item->jumlah_pinjam }}</div>
-                                    <div class="history-item-purpose">Purpose: {{ $item->catatan }}</div>
+                                    <div class="history-item-purpose">Purpose: {{ $item->tujuan }}</div>
                                 </div>
                             </div>
                         @empty
@@ -107,15 +135,27 @@
                         @endforelse
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     @include('partwelcome.footer')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = document.querySelectorAll(".fade-message");
 
-    <script src="borrowing.js"></script>
+            messages.forEach(function(msg) {
+                // Fade in
+                setTimeout(() => msg.classList.add("show"), 100);
+
+                // Fade out after 5 detik
+                setTimeout(() => {
+                    msg.classList.remove("show");
+                    // Hapus elemen dari DOM setelah transisi selesai
+                    setTimeout(() => msg.remove(), 500);
+                }, 5000);
+            });
+        });
+    </script>
 </body>
 
 </html>

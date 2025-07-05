@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('kode_barang')->unique();
             $table->string('nama_barang');
             $table->string('gambar_barang');
+            $table->text('deskripsi')->nullable();
             $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade');
             $table->integer('jumlah')->default(0);
             $table->string('lokasi')->nullable();

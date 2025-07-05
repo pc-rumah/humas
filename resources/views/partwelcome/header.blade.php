@@ -9,7 +9,7 @@
             <a href="/inven" class="nav-link">Inventory</a>
             <a href="/pinjam" class="nav-link">Borrowing</a>
             <a href="/surat" class="nav-link">Letters</a>
-            <a href="/news" class="nav-link">News & Agenda</a>
+            <a href="/newsagenda" class="nav-link">News & Agenda</a>
         </nav>
     </div>
 </header>

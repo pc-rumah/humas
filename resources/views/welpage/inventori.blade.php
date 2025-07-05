@@ -63,7 +63,7 @@
                 <div class="inventory-grid">
                     @forelse ($inventori as $item)
                         <div class="inventory-item" data-nama="{{ strtolower($item->nama_barang) }}"
-                            data-deskripsi="{{ strtolower($item->description) }}"
+                            data-deskripsi="{{ strtolower($item->deskripsi) }}"
                             data-kategori="{{ $item->kategori_id }}">
                             <img src="{{ asset('storage/' . $item->gambar_barang) }}" alt="{{ $item->nama_barang }}"
                                 class="item-image">
@@ -73,7 +73,7 @@
                                     <span
                                         class="stock-badge {{ getStockStatus($item->jumlah) }}">{{ getStockText($item->jumlah) }}</span>
                                 </div>
-                                <p class="item-description">{{ $item->description }}</p>
+                                <p class="item-description">{{ $item->deskripsi }}</p>
                                 <div class="item-details">
                                     <span class="item-category">Category: {{ $item->kategori->nama_kategori }}</span>
                                     <span class="item-stock">Stock: {{ $item->jumlah }}</span>

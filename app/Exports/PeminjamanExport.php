@@ -15,7 +15,7 @@ class PeminjamanExport implements FromCollection, WithHeadings
     {
         return Peminjaman::with(['user', 'inventori'])->get()->map(function ($item) {
             return [
-                'peminjam'         => $item->user->name ?? '-',
+                'peminjam'         => $item->nama_peminjam ?? '-',
                 'nama_barang'      => $item->inventori->nama_barang ?? '-',
                 'tanggal_pinjam'   => $item->tanggal_pinjam,
                 'tanggal_kembali'  => $item->tanggal_kembali,

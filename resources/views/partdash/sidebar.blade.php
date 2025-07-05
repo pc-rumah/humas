@@ -55,6 +55,37 @@
                         <span class="hide-menu">Peminjaman</span>
                     </a>
                 </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">News & Agenda</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ Request::is('kategorinews*') ? 'active' : '' }}"
+                        href="{{ route('kategorinews.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">Kategori News & Agenda</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ Request::is('news*') ? 'active' : '' }}" href="{{ route('news.index') }}"
+                        aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">News</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ Request::is('agenda*') ? 'active' : '' }}"
+                        href="{{ route('agenda.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">Agenda</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

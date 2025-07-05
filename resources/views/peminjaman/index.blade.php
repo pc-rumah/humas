@@ -83,7 +83,7 @@
                                         <h6 class="fw-semibold mb-0">{{ $loop->iteration }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->user->name }}</h6>
+                                        <h6 class="fw-semibold mb-1">{{ $item->nama_peminjam }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">{{ $item->inventori->nama_barang }}</h6>
@@ -103,7 +103,7 @@
                                         <h6 class="fw-semibold mb-1">{{ $item->jumlah_pinjam }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->catatan }}</h6>
+                                        <h6 class="fw-semibold mb-1">{{ $item->tujuan }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <div class="d-flex gap-2">

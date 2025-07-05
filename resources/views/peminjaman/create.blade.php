@@ -9,9 +9,13 @@
                     @include('partdash.error')
                     <form action="{{ route('peminjaman.store') }}" method="POST" class="space-y-4">
                         @csrf
-
+                        <div class="mb-3">
+                            <label class="form-label">Nama Peminjam</label>
+                            <input type="text" name="nama_peminjam" class="form-control" placeholder="Nama Peminjam"
+                                required>
+                        </div>
                         <div class="mb-2">
-                            <label for="inventori_id" class="block font-medium mb-1">Barang Inventori</label>
+                            <label for="inventori_id" class="form-label">Barang Inventori</label>
                             <select name="inventori_id" id="inventori_id"
                                 class="select form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 required>
@@ -27,21 +31,21 @@
                         </div>
 
                         <div class="mb-2">
-                            <label for="tanggal_pinjam" class="block font-medium mb-1">Tanggal Pinjam</label>
+                            <label for="tanggal_pinjam" class="form-label">Tanggal Pinjam</label>
                             <input type="date" name="tanggal_pinjam" id="tanggal_pinjam"
                                 class="form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 value="{{ old('tanggal_pinjam') }}" required>
                         </div>
 
                         <div class="mb-2">
-                            <label for="tanggal_kembali" class="block font-medium mb-1">Tanggal Kembali</label>
+                            <label for="tanggal_kembali" class="form-label">Tanggal Kembali</label>
                             <input type="date" name="tanggal_kembali" id="tanggal_kembali"
                                 class="form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 value="{{ old('tanggal_kembali') }}" required>
                         </div>
 
                         <div class="mb-2">
-                            <label for="jumlah" class="block font-medium mb-1">Jumlah Pinjam</label>
+                            <label for="jumlah" class="form-label">Jumlah Pinjam</label>
                             <input type="number" name="jumlah_pinjam" id="jumlah" min="1"
                                 class="form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 value="{{ old('jumlah') }}" required>
@@ -49,17 +53,15 @@
 
 
                         <div class="mb-2">
-                            <label for="catatan" class="block font-medium mb-1">Catatan</label>
-                            <textarea name="catatan" id="catatan" rows="3"
-                                class="form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                placeholder="Tulis catatan jika ada...">{{ old('catatan') }}</textarea>
+                            <label for="tujuan" class="form-label">Tujuan</label>
+                            <textarea name="tujuan" id="tujuan" rows="3"
+                                class="form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">{{ old('tujuan') }}</textarea>
                         </div>
 
                         <div>
                             <button type="submit" class="btn btn-primary mt-2">Simpan</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
