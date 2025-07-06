@@ -44,10 +44,10 @@
                         </div>
 
                         <div class="mb-2">
-                            <label for="catatan" class="block font-medium mb-1">Catatan</label>
-                            <textarea name="catatan" id="catatan" rows="3"
+                            <label for="tujuan" class="block font-medium mb-1">Tujuan</label>
+                            <textarea name="tujuan" id="tujuan" rows="3"
                                 class="form-control w-full border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                placeholder="Tulis catatan jika ada...">{{ $peminjaman->catatan }}</textarea>
+                                placeholder="Tulis tujuan jika ada...">{{ $peminjaman->tujuan }}</textarea>
                         </div>
 
                         <div>
