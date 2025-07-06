@@ -17,8 +17,8 @@
     <section class="borrowing-section">
         <div class="container">
             <div class="borrowing-header">
-                <h1>Borrowing Management</h1>
-                <p>Request items and track your borrowing history</p>
+                <h1>Manajemen Peminjaman</h1>
+                <p>Minta barang dan lacak riwayat peminjaman Anda</p>
             </div>
 
             <div class="borrowing-content">
@@ -41,7 +41,7 @@
                             </ul>
                         </div>
                     @endif
-                    <h2>Request Item</h2>
+                    <h2>Barang Permintaan</h2>
                     <form action="{{ route('peminjaman.storeUser') }}" class="request-form" method="POST"
                         id="requestForm">
                         @csrf
@@ -107,7 +107,7 @@
                 @endphp
 
                 <div class="history-container">
-                    <h2>Request History</h2>
+                    <h2>Riwayat Permintaan</h2>
                     <div class="history-list">
                         @forelse ($peminjaman as $item)
                             <div class="history-item">
@@ -123,14 +123,14 @@
                                         {{ \Carbon\Carbon::parse($item->tanggal_kembali)->format('m/d/Y') }}</span>
                                 </div>
                                 <div class="history-item-details">
-                                    <div class="history-item-quantity">Quantity: {{ $item->jumlah_pinjam }}</div>
-                                    <div class="history-item-purpose">Purpose: {{ $item->tujuan }}</div>
+                                    <div class="history-item-quantity">Jumlah: {{ $item->jumlah_pinjam }}</div>
+                                    <div class="history-item-purpose">Tujuan: {{ $item->tujuan }}</div>
                                 </div>
                             </div>
                         @empty
                             <div class="empty-history">
                                 <div class="empty-history-icon">📋</div>
-                                <p>No borrowing history found.</p>
+                                <p>Tidak ditemukan riwayat peminjaman.</p>
                             </div>
                         @endforelse
                     </div>
@@ -144,13 +144,10 @@
             const messages = document.querySelectorAll(".fade-message");
 
             messages.forEach(function(msg) {
-                // Fade in
                 setTimeout(() => msg.classList.add("show"), 100);
 
-                // Fade out after 5 detik
                 setTimeout(() => {
                     msg.classList.remove("show");
-                    // Hapus elemen dari DOM setelah transisi selesai
                     setTimeout(() => msg.remove(), 500);
                 }, 5000);
             });

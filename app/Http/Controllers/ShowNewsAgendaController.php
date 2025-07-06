@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\KategoriNews;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,7 @@ class ShowNewsAgendaController extends Controller
     {
         $news = News::all();
         $agenda = Agenda::all();
-        return view('welpage.newsagen', compact('news', 'agenda'));
+        $kategori = KategoriNews::all();
+        return view('welpage.newsagen', compact('news', 'agenda', 'kategori'));
     }
 }

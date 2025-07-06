@@ -15,21 +15,20 @@
     <section class="news-agenda-section">
         <div class="container">
             <div class="page-header">
-                <h1>News & Agenda</h1>
-                <p>Stay updated with the latest news and upcoming events</p>
+                <h1>Berita & Agenda</h1>
+                <p>Tetap dapatkan informasi terkini tentang berita dan acara mendatang</p>
             </div>
 
             <div class="content-layout">
                 <div class="news-section">
                     <div class="section-header">
-                        <h2>📰 Latest News</h2>
+                        <h2>📰 Berita Terbaru</h2>
                         <div class="filter-controls">
                             <select id="newsFilter" class="filter-select">
                                 <option value="">All Categories</option>
-                                <option value="Company">Company</option>
-                                <option value="Technology">Technology</option>
-                                <option value="Events">Events</option>
-                                <option value="Announcements">Announcements</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -54,7 +53,7 @@
                         @empty
                             <div class="empty-state">
                                 <div class="empty-state-icon">📰</div>
-                                <p>No news articles found.</p>
+                                <p>Tidak ada artikel berita yang ditemukan.</p>
                             </div>
                         @endforelse
                     </div>
@@ -63,14 +62,13 @@
                 <!-- Agenda Section -->
                 <div class="agenda-section">
                     <div class="section-header">
-                        <h2>📅 Upcoming Agenda</h2>
+                        <h2>📅 Agenda Mendatang</h2>
                         <div class="filter-controls">
                             <select id="agendaFilter" class="filter-select">
                                 <option value="">All Types</option>
-                                <option value="Meeting">Meeting</option>
-                                <option value="Event">Event</option>
-                                <option value="Training">Training</option>
-                                <option value="Conference">Conference</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}"> {{ $item->nama_kategori }} </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -107,6 +105,59 @@
         </div>
     </section>
     @include('partwelcome.footer')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsFilter = document.getElementById('newsFilter');
+            const agendaFilter = document.getElementById('agendaFilter');
+            const newsItems = document.querySelectorAll('#newsGrid .news-card');
+            const agendaItems = document.querySelectorAll('#agendaGrid .agenda-card');
+
+            newsFilter.addEventListener('change', function() {
+                const selected = this.value;
+                newsItems.forEach(item => {
+                    if (selected === '') {
+                        item.style.display = 'block';
+                    } else {
+                        const categorySpan = item.querySelector('.news-category');
+                        if (categorySpan && categorySpan.textContent.trim() == getCategoryNameById(
+                                selected)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            agendaFilter.addEventListener('change', function() {
+                const selected = this.value;
+                agendaItems.forEach(item => {
+                    if (selected === '') {
+                        item.style.display = 'block';
+                    } else {
+                        const categorySpan = item.querySelector('.agenda-type');
+                        if (categorySpan && categorySpan.textContent.trim() == getCategoryNameById(
+                                selected)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            const kategoriMap = {
+                @foreach ($kategori as $item)
+                    "{{ $item->id }}": "{{ $item->nama_kategori }}",
+                @endforeach
+            };
+
+            function getCategoryNameById(id) {
+                return kategoriMap[id] || '';
+            }
+        });
+    </script>
+
 </body>
 
 </html>

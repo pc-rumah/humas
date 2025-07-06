@@ -12,10 +12,6 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ShowNewsAgendaController;
 use App\Http\Controllers\WelcomeController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [WelcomeController::class, 'index']);
 
 Route::get('/pinjam', [PeminjamanController::class, 'home']);
@@ -25,8 +21,6 @@ Route::get('/newsagenda', [ShowNewsAgendaController::class, 'home']);
 Route::get('/permohonan', [LetterController::class, 'home']);
 Route::post('/peminjaman/user', [PeminjamanController::class, 'storeUser'])->name('peminjaman.storeUser');
 Route::post('/letter/user', [LetterController::class, 'storeUser'])->name('letter.storeUser');
-Route::get('/letter/download/{id}', [LetterController::class, 'download'])->name('letter.download');
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -55,6 +49,7 @@ Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
     Route::resource('news', NewsController::class);
     Route::resource('agenda', AgendaController::class);
     Route::resource('letter', LetterController::class);
+    Route::get('/letter/download/{id}', [LetterController::class, 'download'])->name('letter.download');
 });
 
 require __DIR__ . '/auth.php';

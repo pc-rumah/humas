@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management</title>
+    <title>Manajemen Inventaris</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('landing/inventory.css') }}">
 </head>
@@ -17,8 +17,8 @@
     <section class="inventory-section">
         <div class="container">
             <div class="inventory-header">
-                <h1>Inventory Management</h1>
-                <p>Browse and manage available items with real-time stock tracking</p>
+                <h1>Manajemen Inventaris</h1>
+                <p>Telusuri dan kelola item yang tersedia dengan pelacakan stok secara real-time</p>
             </div>
             @php
                 function getStockStatus($jumlah)

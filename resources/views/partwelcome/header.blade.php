@@ -2,14 +2,14 @@
     <div class="container">
         <div class="logo">
             <span class="logo-icon">👥</span>
-            <span class="logo-text">Humas Service</span>
+            <span class="logo-text">Layanan Humas</span>
         </div>
         <nav class="nav">
             <a href="/" class="nav-link active">Home</a>
-            <a href="/inven" class="nav-link">Inventory</a>
-            <a href="/pinjam" class="nav-link">Borrowing</a>
-            <a href="/permohonan" class="nav-link">Letters</a>
-            <a href="/newsagenda" class="nav-link">News & Agenda</a>
+            <a href="/inven" class="nav-link">Inventori</a>
+            <a href="/pinjam" class="nav-link">Peminjaman</a>
+            <a href="/permohonan" class="nav-link">Surat</a>
+            <a href="/newsagenda" class="nav-link">Berita & Agenda</a>
         </nav>
     </div>
 </header>

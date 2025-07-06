@@ -21,12 +21,12 @@
                         alt="Office Team Meeting">
                     <div class="slide-content">
                         <div class="container">
-                            <h1>Professional Team Collaboration</h1>
-                            <p>Experience seamless teamwork and efficient communication with our comprehensive public
-                                relations services.</p>
+                            <h1>Tim Kolaborasi Profesional</h1>
+                            <p>Rasakan tim kerja yang lancar dan komunikasi yang efisien dengan layanan hubungan
+                                masyarakat kami yang komprehensif.</p>
                             <div class="slide-buttons">
-                                <button class="btn btn-primary">Get Started</button>
-                                <button class="btn btn-secondary">Learn More</button>
+                                <a href="#services" class="btn btn-primary">Memulai</a>
+                                <a href="#services" class="btn btn-secondary">Pelajari Lebih Lanjut</a>
                             </div>
                         </div>
                     </div>
@@ -36,12 +36,13 @@
                         alt="Modern Office Space">
                     <div class="slide-content">
                         <div class="container">
-                            <h1>Modern Workspace Solutions</h1>
-                            <p>Streamline your workflow with our innovative inventory management and document processing
-                                systems.</p>
+                            <h1>Solusi Ruang Kerja Modern</h1>
+                            <p>Menampilkan alur kerja Anda dengan sistem manajemen inventaris dan penyimpanan dokumen
+                                kami
+                                yang inovatif.</p>
                             <div class="slide-buttons">
-                                <a href="inventory.html" class="btn btn-primary">Browse Inventory</a>
-                                <button class="btn btn-secondary">View Services</button>
+                                <a href="/inven" class="btn btn-primary">Inventaris</a>
+                                <a href="#services" class="btn btn-secondary">Lihat Layanan</a>
                             </div>
                         </div>
                     </div>
@@ -51,12 +52,12 @@
                         alt="Business Meeting">
                     <div class="slide-content">
                         <div class="container">
-                            <h1>Strategic Business Planning</h1>
-                            <p>Stay organized with our agenda management and news update systems designed for modern
-                                businesses.</p>
+                            <h1>Perencanaan Bisnis Strategis</h1>
+                            <p>Tetap terorganisasi dengan sistem manajemen agenda dan pembaruan berita kami yang
+                                dirancang untuk bisnis modern.</p>
                             <div class="slide-buttons">
-                                <a href="news-agenda.html" class="btn btn-primary">View News & Agenda</a>
-                                <button class="btn btn-secondary">Latest Updates</button>
+                                <a href="/newsagenda" class="btn btn-primary">Lihat Berita & Agenda</a>
+                                <a href="/newsagenda" class="btn btn-secondary">Pembaruan Terbaru</a>
                             </div>
                         </div>
                     </div>
@@ -69,37 +70,38 @@
     </section>
 
     <!-- Services Section -->
-    <section class="services">
+    <section id="services" class="services">
         <div class="container">
             <div class="section-header">
-                <h2>Our Services</h2>
-                <p>Comprehensive public relations solutions designed to streamline your workflow and improve efficiency
+                <h2>Layanan Kami</h2>
+                <p>Solusi hubungan masyarakat yang komprehensif yang dirancang untuk memperlancar alur kerja Anda dan
+                    meningkatkan efisiensi
                 </p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon blue">📦</div>
-                    <h3>Inventory Management</h3>
-                    <p>Browse and manage available items with real-time stock tracking</p>
-                    <a href="/inven" class="learn-more">Learn More →</a>
+                    <h3>Manajemen Inventaris</h3>
+                    <p>Telusuri dan kelola item yang tersedia dengan pelacakan stok secara real-time</p>
+                    <a href="/inven" class="learn-more">Detail →</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon green">📄</div>
-                    <h3>Document Borrowing</h3>
-                    <p>Request and track borrowed items with easy-to-use forms</p>
-                    <a href="/pinjam" class="learn-more">Learn More →</a>
+                    <h3>Peminjaman</h3>
+                    <p>lacak item yang dipinjam dengan formulir yang mudah digunakan</p>
+                    <a href="/pinjam" class="learn-more">Detail →</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon orange">✉️</div>
-                    <h3>Letter Requests</h3>
-                    <p>Request official letters and documents with automated processing</p>
-                    <a href="/surat" class="learn-more">Learn More →</a>
+                    <h3>Permintaan Surat</h3>
+                    <p>Permintaan surat dan dokumen resmi dengan pemrosesan otomatis</p>
+                    <a href="/permohonan" class="learn-more">Detail →</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon purple">📰</div>
-                    <h3>News & Agenda</h3>
-                    <p>Stay informed with the latest news and announcements</p>
-                    <a href="/news class="learn-more">Learn More →</a>
+                    <h3>Berita & Agenda</h3>
+                    <p>Tetap dapatkan informasi terkini mengenai berita dan pengumuman terbaru</p>
+                    <a href="/newsagenda" class="learn-more">Detail →</a>
                 </div>
             </div>
         </div>
@@ -108,12 +110,12 @@
     <!-- CTA Section -->
     <section class="cta">
         <div class="container">
-            <h2>Ready to Get Started?</h2>
-            <p>Experience the power of streamlined public relations management. Access all our services from one
-                convenient platform.</p>
+            <h2>Siap untuk Memulai?</h2>
+            <p>Rasakan kekuatan manajemen hubungan masyarakat yang efisien. Akses semua layanan kami dari satu platform
+                yang mudah digunakan.</p>
             <div class="cta-buttons">
-                <a href="/inven" class="btn btn-primary">Browse Inventory</a>
-                <a href="/pinjam" class="btn btn-outline">Request Items</a>
+                <a href="/inven" class="btn btn-primary">Inventory</a>
+                <a href="/pinjam" class="btn btn-outline">Pinjam Barang</a>
             </div>
         </div>
     </section>
