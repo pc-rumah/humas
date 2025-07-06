@@ -76,13 +76,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="foto_path">Upload Foto Dokumentasi</label>
-                            <input type="file" name="foto_path" id="foto_path" class="form-input" accept="image/*">
+                            <label for="detail_foto">Detail Dokumentasi</label>
+                            <input type="text" name="detail_foto" id="detail_foto" class="form-input"
+                                placeholder="Deskripsi foto kegiatan" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="video_path">Upload Video Dokumentasi</label>
-                            <input type="file" name="video_path" id="video_path" class="form-input" accept="video/*">
+                            <label for="upload_surat">Upload Surat (opsional)</label>
+                            <input type="file" name="upload_surat" id="upload_surat" class="form-input"
+                                accept=".pdf,.doc,.docx,.jpg,.png">
                         </div>
 
                         <button type="submit" class="btn btn-primary submit-btn">Submit Permohonan</button>
@@ -120,9 +122,6 @@
                                     <div class="notes-section">
                                         <div class="notes-label">Lokasi Kegiatan</div>
                                         <div class="notes-text">{{ $item->lokasi_kegiatan }}</div>
-                                        <a href="{{ route('letter.download', $item->id) }}">
-                                            Download Surat Permohonan PDF
-                                        </a>
                                     </div>
                                 </div>
                             </div>

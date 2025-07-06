@@ -29,7 +29,7 @@
                     <span class="hide-menu">INVENTORY</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ Request::is('kategori*') ? 'active' : '' }}"
+                    <a class="sidebar-link {{ Request::routeIs('kategori.*') ? 'active' : '' }}"
                         href="{{ route('kategori.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>
@@ -60,7 +60,7 @@
                     <span class="hide-menu">News & Agenda</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ Request::is('kategorinews*') ? 'active' : '' }}"
+                    <a class="sidebar-link {{ Request::is('kategorinews.*') ? 'active' : '' }}"
                         href="{{ route('kategorinews.index') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="card w-100">
         <div class="card-body p-4">
-            <a class="btn btn-primary m-1" href="{{ route('inventori.create') }}">Tambah Kategori</a>
+            <a class="btn btn-primary m-1" href="{{ route('inventori.create') }}">Tambah</a>
             @include('partdash.alert')
             <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle">

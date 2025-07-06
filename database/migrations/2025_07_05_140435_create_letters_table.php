@@ -18,9 +18,8 @@ return new class extends Migration
             $table->date('tanggal_kegiatan');
             $table->string('waktu_kegiatan');
             $table->string('lokasi_kegiatan');
-            $table->string('foto_path')->nullable();
-            $table->string('video_path')->nullable();
-            $table->string('pdf_path')->nullable();
+            $table->string('detail_foto');
+            $table->string('upload_surat')->nullable();
             $table->timestamps();
         });
     }

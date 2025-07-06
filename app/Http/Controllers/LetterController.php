@@ -23,7 +23,7 @@ class LetterController extends Controller
 
     public function create()
     {
-        return view('letter.create');
+        // return view('letter.create');
     }
 
     public function store(Request $request)
@@ -39,18 +39,13 @@ class LetterController extends Controller
             'tanggal_kegiatan' => 'required|date',
             'waktu_kegiatan'   => 'required|string|max:255',
             'lokasi_kegiatan'  => 'required|string|max:255',
-            'foto_path'        => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'video_path'       => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg|max:20000',
+            'detail_foto'      => 'required|string|max:255',
+            'upload_surat'     => 'nullable|file|max:20480',
         ]);
 
-        $fotoPath = null;
-        if ($request->hasFile('foto_path')) {
-            $fotoPath = $request->file('foto_path')->store('dokumentasi/foto', 'public');
-        }
-
-        $videoPath = null;
-        if ($request->hasFile('video_path')) {
-            $videoPath = $request->file('video_path')->store('dokumentasi/video', 'public');
+        $uploadPath = null;
+        if ($request->hasFile('upload_surat')) {
+            $uploadPath = $request->file('upload_surat')->store('surat_uploads', 'public');
         }
 
         $permohonan = Letter::create([
@@ -59,17 +54,8 @@ class LetterController extends Controller
             'tanggal_kegiatan' => $validated['tanggal_kegiatan'],
             'waktu_kegiatan'   => $validated['waktu_kegiatan'],
             'lokasi_kegiatan'  => $validated['lokasi_kegiatan'],
-            'foto_path'        => $fotoPath,
-            'video_path'       => $videoPath,
-        ]);
-
-        $pdf = Pdf::loadView('pdf.permohonan', ['permohonan' => $permohonan]);
-
-        $pdfFileName = 'surat_permohonan_' . $permohonan->id . '.pdf';
-        Storage::disk('public')->put('surat/' . $pdfFileName, $pdf->output());
-
-        $permohonan->update([
-            'pdf_path' => 'surat/' . $pdfFileName,
+            'detail_foto'      => $validated['detail_foto'],
+            'upload_surat'     => $uploadPath,
         ]);
 
         $waNumber = '6283866907175';
@@ -101,12 +87,17 @@ class LetterController extends Controller
 
     public function download($id)
     {
-        $permohonan = Letter::findOrFail($id);
+        $letter = Letter::findOrFail($id);
 
-        if (!$permohonan->pdf_path || !Storage::disk('public')->exists($permohonan->pdf_path)) {
-            return abort(404, 'PDF tidak ditemukan.');
+        if (!$letter->upload_surat) {
+            return back()->with('error', 'Tidak ada surat yang diupload.');
         }
 
-        return response()->download(storage_path('app/public/' . $permohonan->pdf_path));
+        // Pakai disk 'public'
+        if (!Storage::disk('public')->exists($letter->upload_surat)) {
+            return back()->with('error', 'File tidak ditemukan.');
+        }
+
+        return Storage::disk('public')->download($letter->upload_surat, basename($letter->upload_surat));
     }
 }

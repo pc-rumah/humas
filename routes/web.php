@@ -25,8 +25,7 @@ Route::get('/newsagenda', [ShowNewsAgendaController::class, 'home']);
 Route::get('/permohonan', [LetterController::class, 'home']);
 Route::post('/peminjaman/user', [PeminjamanController::class, 'storeUser'])->name('peminjaman.storeUser');
 Route::post('/letter/user', [LetterController::class, 'storeUser'])->name('letter.storeUser');
-
-Route::get('/letter/{id}/download', [LetterController::class, 'download'])->name('letter.download');
+Route::get('/letter/download/{id}', [LetterController::class, 'download'])->name('letter.download');
 
 
 Route::get('/dashboard', function () {
