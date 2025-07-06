@@ -8,7 +8,7 @@
             <a href="/" class="nav-link active">Home</a>
             <a href="/inven" class="nav-link">Inventory</a>
             <a href="/pinjam" class="nav-link">Borrowing</a>
-            <a href="/surat" class="nav-link">Letters</a>
+            <a href="/permohonan" class="nav-link">Letters</a>
             <a href="/newsagenda" class="nav-link">News & Agenda</a>
         </nav>
     </div>

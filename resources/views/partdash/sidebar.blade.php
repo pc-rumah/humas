@@ -86,6 +86,15 @@
                         <span class="hide-menu">Agenda</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ Request::is('letter*') ? 'active' : '' }}"
+                        href="{{ route('letter.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">Letter</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

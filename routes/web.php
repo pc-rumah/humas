@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\KategoriNewsController;
+use App\Http\Controllers\LetterController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ShowNewsAgendaController;
@@ -21,8 +22,11 @@ Route::get('/pinjam', [PeminjamanController::class, 'home']);
 Route::get('inven', [InventoryController::class, 'home']);
 Route::get('/pinjam', [PeminjamanController::class, 'home']);
 Route::get('/newsagenda', [ShowNewsAgendaController::class, 'home']);
+Route::get('/permohonan', [LetterController::class, 'home']);
 Route::post('/peminjaman/user', [PeminjamanController::class, 'storeUser'])->name('peminjaman.storeUser');
+Route::post('/letter/user', [LetterController::class, 'storeUser'])->name('letter.storeUser');
 
+Route::get('/letter/{id}/download', [LetterController::class, 'download'])->name('letter.download');
 
 
 Route::get('/dashboard', function () {
@@ -51,6 +55,7 @@ Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
     Route::resource('peminjaman', PeminjamanController::class);
     Route::resource('news', NewsController::class);
     Route::resource('agenda', AgendaController::class);
+    Route::resource('letter', LetterController::class);
 });
 
 require __DIR__ . '/auth.php';
