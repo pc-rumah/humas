@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('letters', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pemohon');
+            $table->string('nama_kegiatan');
             $table->string('instansi');
             $table->date('tanggal_kegiatan');
             $table->string('waktu_kegiatan');

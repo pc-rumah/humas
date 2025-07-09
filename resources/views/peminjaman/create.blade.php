@@ -14,6 +14,11 @@
                             <input type="text" name="nama_peminjam" class="form-control" placeholder="Nama Peminjam"
                                 required>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nama Kegiatan</label>
+                            <input type="text" name="nama_kegiatan" class="form-control" placeholder="Nama Kegiatan"
+                                required>
+                        </div>
                         <div class="mb-2">
                             <label for="inventori_id" class="form-label">Barang Inventori</label>
                             <select name="inventori_id" id="inventori_id"

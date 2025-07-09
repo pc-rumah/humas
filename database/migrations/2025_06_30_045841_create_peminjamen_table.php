@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('inventori_id')->constrained('inventori')->cascadeOnDelete();
             $table->string('nama_peminjam');
+            $table->string('nama_kegiatan');
+            $table->string('email');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali')->nullable();
             $table->enum('status', ['menunggu', 'disetujui', 'dikembalikan'])->default('menunggu');

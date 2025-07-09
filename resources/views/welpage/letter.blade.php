@@ -17,8 +17,8 @@
     <section class="letters-section">
         <div class="container">
             <div class="letters-header">
-                <h1>Letter Request Management</h1>
-                <p>Request official letters and documents with automated processing</p>
+                <h1>Manajemen Permintaan Surat</h1>
+                <p>Permintaan surat dan dokumen resmi dengan pemrosesan otomatis</p>
             </div>
 
             <div class="letters-content">
@@ -48,6 +48,12 @@
                         <div class="form-group">
                             <label for="nama_pemohon">Nama Pemohon</label>
                             <input type="text" name="nama_pemohon" id="nama_pemohon" class="form-input"
+                                placeholder="Masukkan nama lengkap" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama_kegiatan">Nama Kegiatan</label>
+                            <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-input"
                                 placeholder="Masukkan nama lengkap" required>
                         </div>
 
@@ -89,7 +95,6 @@
 
                         <button type="submit" class="btn btn-primary submit-btn">Submit Permohonan</button>
                     </form>
-
                 </div>
 
                 <!-- Request History -->

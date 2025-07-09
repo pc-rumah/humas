@@ -35,6 +35,7 @@ class LetterController extends Controller
     {
         $validated = $request->validate([
             'nama_pemohon'     => 'required|string|max:255',
+            'nama_kegiatan'     => 'required|string|max:255',
             'instansi'         => 'required|string|max:255',
             'tanggal_kegiatan' => 'required|date',
             'waktu_kegiatan'   => 'required|string|max:255',
@@ -50,6 +51,7 @@ class LetterController extends Controller
 
         $permohonan = Letter::create([
             'nama_pemohon'     => $validated['nama_pemohon'],
+            'nama_kegiatan'    => $validated['nama_kegiatan'],
             'instansi'         => $validated['instansi'],
             'tanggal_kegiatan' => $validated['tanggal_kegiatan'],
             'waktu_kegiatan'   => $validated['waktu_kegiatan'],

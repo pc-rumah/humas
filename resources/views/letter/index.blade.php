@@ -16,6 +16,9 @@
                                 <h6 class="fw-semibold mb-0">Nama</h6>
                             </th>
                             <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Nama Kegiatan</h6>
+                            </th>
+                            <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Instansi</h6>
                             </th>
                             <th class="border-bottom-0">
@@ -48,6 +51,9 @@
                                     </td>
                                     <td class="border-bottom-0 align-middle">
                                         <h6 class="fw-semibold mb-1">{{ $item->nama_pemohon }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0 align-middle">
+                                        <h6 class="fw-semibold mb-1">{{ $item->nama_kegiatan }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">{{ $item->instansi }}</h6>

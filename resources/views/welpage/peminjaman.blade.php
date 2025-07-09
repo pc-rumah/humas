@@ -53,6 +53,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="nama_kegiatan">Nama Kegiatan</label>
+                            <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-input"
+                                placeholder="Nama Kegiatan" value="{{ old('nama_kegiatan') }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-input" placeholder="Email"
+                                value="{{ old('email') }}" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="inventori_id">Nama Barang</label>
                             <select name="inventori_id" id="inventori_id" class="form-select" required>
                                 <option value="" disabled {{ old('inventori_id') ? '' : 'selected' }}>Pilih Barang

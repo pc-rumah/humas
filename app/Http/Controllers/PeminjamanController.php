@@ -7,7 +7,9 @@ use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\PeminjamanExport;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Mail\PeminjamanDisetujuiMail;
 
 class PeminjamanController extends Controller
 {
@@ -76,6 +78,8 @@ class PeminjamanController extends Controller
         $validated = $request->validate([
             'inventori_id' => 'required|exists:inventori,id',
             'nama_peminjam' => 'required|string|max:255',
+            'nama_kegiatan' => 'required|string|max:255',
+            'email'         => 'required|email|string|max:255',
             'tanggal_pinjam' => 'required|date',
             'tanggal_kembali' => 'nullable|date|after_or_equal:tanggal_pinjam',
             'jumlah_pinjam' => 'required|integer|min:1',
@@ -97,7 +101,7 @@ class PeminjamanController extends Controller
 
     public function show(Peminjaman $peminjaman)
     {
-        //
+        return view('peminjaman.show', compact('peminjaman'));
     }
 
     public function edit(Peminjaman $peminjaman)
@@ -109,27 +113,32 @@ class PeminjamanController extends Controller
     public function update(Request $request, Peminjaman $peminjaman)
     {
         $validated = $request->validate([
-            'tanggal_pinjam' => 'required|date',
-            'tanggal_kembali' => 'nullable|date|after_or_equal:tanggal_pinjam',
             'status' => 'required|in:menunggu,disetujui,dikembalikan',
-            'tujuan' => 'required|string',
         ]);
 
         $oldStatus = $peminjaman->status;
-        $peminjaman->update($validated);
+        $newStatus = $validated['status'];
 
-        if ($validated['status'] === 'disetujui' && $oldStatus !== 'disetujui') {
+        $peminjaman->update(['status' => $newStatus]);
+
+        if ($newStatus === 'disetujui' && $oldStatus !== 'disetujui') {
             if ($peminjaman->inventori->jumlah < $peminjaman->jumlah_pinjam) {
-                return back()->withErrors(['status' => 'Stok barang sudah tidak cukup.']);
+                return back()->withErrors(['status' => 'Stok barang tidak mencukupi.']);
             }
+
             $peminjaman->inventori->decrement('jumlah', $peminjaman->jumlah_pinjam);
+            // dd($peminjaman->email);
+            if ($peminjaman->email) {
+                Mail::to($peminjaman->email)
+                    ->send(new PeminjamanDisetujuiMail($peminjaman));
+            }
         }
 
-        if ($validated['status'] === 'dikembalikan' && $oldStatus !== 'dikembalikan') {
+        if ($newStatus === 'dikembalikan' && $oldStatus !== 'dikembalikan') {
             $peminjaman->inventori->increment('jumlah', $peminjaman->jumlah_pinjam);
         }
 
-        return redirect()->route('peminjaman.index')->with('success', 'Data peminjaman berhasil diperbarui.');
+        return redirect()->route('peminjaman.index')->with('success', 'Status peminjaman berhasil diperbarui.');
     }
 
     public function destroy(Peminjaman $peminjaman)
