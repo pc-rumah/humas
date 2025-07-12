@@ -18,14 +18,14 @@
                             <img style="max-width: 20%" src="{{ asset('storage/' . $news->gambar) }}" alt="gambar">
                         </div>
                         <div class="mb-3">
-                            <label for="kategori" class="form-label">Kategori</label>
-                            <select name="kategori_id" id="kategori" class="form-control" required>
+                            <label for="kategorinews_id" class="form-label">Kategori</label>
+                            <select name="kategorinews_id" id="kategorinews_id" class="form-control" required>
                                 <option value="" disabled
-                                    {{ old('kategori_id', $news->kategorinews_id) == '' ? 'selected' : '' }}>Pilih Kategori
+                                    {{ old('kategorinews_id', $news->kategorinews_id) == '' ? 'selected' : '' }}>Pilih Kategori
                                 </option>
                                 @foreach ($kategorinews as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('kategori_id', $news->kategorinews_id) == $item->id ? 'selected' : '' }}>
+                                        {{ old('kategorinews_id', $news->kategorinews_id) == $item->id ? 'selected' : '' }}>
                                         {{ $item->nama_kategori }}
                                     </option>
                                 @endforeach

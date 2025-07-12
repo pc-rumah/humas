@@ -43,7 +43,7 @@
                     @endif
                     <h2>Barang Permintaan</h2>
                     <form action="{{ route('peminjaman.storeUser') }}" class="request-form" method="POST"
-                        id="requestForm">
+                        id="requestForm" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -56,6 +56,17 @@
                             <label for="nama_kegiatan">Nama Kegiatan</label>
                             <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-input"
                                 placeholder="Nama Kegiatan" value="{{ old('nama_kegiatan') }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ktm">Upload KTM</label>
+                            <input type="file" name="ktm" id="ktm" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="no_telp">No Telp</label>
+                            <input type="number" name="no_telp" id="no_telp" class="form-input" placeholder="no_telp"
+                                value="{{ old('no_telp') }}" required>
                         </div>
 
                         <div class="form-group">

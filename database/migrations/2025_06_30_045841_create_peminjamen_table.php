@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('inventori_id')->constrained('inventori')->cascadeOnDelete();
             $table->string('nama_peminjam');
             $table->string('nama_kegiatan');
+            $table->string('ktm');
+            $table->string('no_telp', 30);
             $table->string('email');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali')->nullable();

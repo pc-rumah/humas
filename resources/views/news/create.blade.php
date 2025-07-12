@@ -5,7 +5,14 @@
         <div class="col-span-12">
             <div class="card bg-base-100 shadow">
                 <div class="card-body p-4 overflow-x-auto">
-                    <h5 class="card-title fw-semibold mb-4">Tambah Berita</h5>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <h5 class="card-title fw-semibold mb-4">Tambah Berita</h5>
+                        </div>
+                        <div class="col-lg-10">
+                            <a class="btn btn-info" target="_blank" href="https://chatgpt.com/">AI</a>
+                        </div>
+                    </div>
                     @include('partdash.error')
                     <div class="card">
                         <div class="card-body">
@@ -17,9 +24,9 @@
                                         accept="image/*">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="kategori" class="form-label">Kategori</label>
-                                    <select name="kategori_id" id="kategori" class="form-control" required>
-                                        <option value="" disabled {{ old('kategori') == '' ? 'selected' : '' }}>Pilih
+                                    <label for="kategorinews_id" class="form-label">Kategori</label>
+                                    <select name="kategorinews_id" id="kategorinews_id" class="form-control" required>
+                                        <option value="" disabled {{ old('kategorinews_id') == '' ? 'selected' : '' }}>Pilih
                                             Kategori
                                         </option>
                                         @foreach ($kategorinews as $item)

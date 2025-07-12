@@ -1,25 +1,77 @@
 @extends('dashboard')
 
 @section('content')
-    <div class="card w-100">
+    <div class="card w-100 shadow-sm">
         <div class="card-body p-4">
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold mb-3">Peminjaman oleh {{ $peminjaman->nama_peminjam }}</h5>
-                            <p class="mb-2"><strong>Nama Barang:</strong> {{ $peminjaman->inventori->nama_barang }}</p>
-                            <p class="mb-2"><strong>Nama Kegiatan:</strong> {{ $peminjaman->nama_kegiatan }}</p>
-                            <p class="mb-2"><strong>Tanggal Pinjam:</strong>
-                                {{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('d-m-Y') }}</p>
-                            <p class="mb-2"><strong>Tanggal Kembali:</strong>
-                                {{ \Carbon\Carbon::parse($peminjaman->tanggal_kembali)->format('d-m-Y') }}</p>
-                            <p class="mb-2"><strong>Status:</strong> {{ $peminjaman->status }}</p>
-                            <p class="mb-2"><strong>Jumlah:</strong> {{ $peminjaman->jumlah_pinjam }}</p>
-                            <p class="mb-0"><strong>Catatan:</strong> {{ $peminjaman->tujuan }}</p>
-                        </div>
+            <h5 class="card-title fw-bold mb-3">
+                Peminjaman oleh {{ $peminjaman->nama_peminjam }}
+            </h5>
+
+            <div class="row mb-3">
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Nama Barang</small>
+                    <div class="fw-semibold">{{ $peminjaman->inventori->nama_barang }}</div>
+                </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Nama Kegiatan</small>
+                    <div class="fw-semibold">{{ $peminjaman->nama_kegiatan }}</div>
+                </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">No Telp</small>
+                    <div class="fw-semibold">{{ $peminjaman->no_telp }}</div>
+                </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Email</small>
+                    <div class="fw-semibold">{{ $peminjaman->email }}</div>
+                </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Tanggal Pinjam</small>
+                    <div class="fw-semibold">
+                        {{ \Carbon\Carbon::parse($peminjaman->tanggal_pinjam)->format('d F Y') }}
                     </div>
                 </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Tanggal Kembali</small>
+                    <div class="fw-semibold">
+                        {{ \Carbon\Carbon::parse($peminjaman->tanggal_kembali)->format('d F Y') }}
+                    </div>
+                </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Status</small>
+                    <div>
+                        @switch($peminjaman->status)
+                            @case('menunggu')
+                                <span class="badge bg-warning text-dark text-capitalize">{{ $peminjaman->status }}</span>
+                            @break
+
+                            @case('disetujui')
+                                <span class="badge bg-success text-dark text-capitalize">{{ $peminjaman->status }}</span>
+                            @break
+
+                            @case('dikembalikan')
+                                <span class="badge bg-primary text-white text-capitalize">{{ $peminjaman->status }}</span>
+                            @break
+
+                            @default
+                                <span class="badge bg-secondary text-white">{{ $peminjaman->status }}</span>
+                        @endswitch
+                    </div>
+                </div>
+                <div class="col-6 mb-2">
+                    <small class="text-muted">Jumlah</small>
+                    <div class="fw-semibold">{{ $peminjaman->jumlah_pinjam }}</div>
+                </div>
+                <div class="col-12 mb-2">
+                    <small class="text-muted">Catatan</small>
+                    <div class="fw-semibold">{{ $peminjaman->tujuan }}</div>
+                </div>
+                @if (isset($peminjaman->ktm))
+                    <div class="mt-3">
+                        <img src="{{ asset('storage/' . $peminjaman->ktm) }}" alt="KTM" class="img-thumbnail"
+                            style="max-width: 200px;">
+                        <div class="text-muted small mt-1">KTM</div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

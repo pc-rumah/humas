@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
@@ -22,9 +23,9 @@ Route::get('/permohonan', [LetterController::class, 'home']);
 Route::post('/peminjaman/user', [PeminjamanController::class, 'storeUser'])->name('peminjaman.storeUser');
 Route::post('/letter/user', [LetterController::class, 'storeUser'])->name('letter.storeUser');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/chart-data', [DashboardController::class, 'getChartData']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

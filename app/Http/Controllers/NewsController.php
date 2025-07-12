@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewsRequest;
 use App\Models\News;
 use App\Models\KategoriNews;
 use Illuminate\Http\Request;
@@ -16,96 +17,51 @@ class NewsController extends Controller
         return view('news.index', compact('news'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $kategorinews = KategoriNews::all();
         return view('news.create', compact('kategorinews'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        $request->validate([
-            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'kategori_id' => 'required|exists:kategori_news,id',
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'tanggal_upload' => 'required|date',
-        ]);
+        $data = $request->validated();
 
-        $path = $request->file('gambar')->store('news', 'public');
+        if ($request->hasFile('gambar')) {
+            $data['gambar'] = $request->file('gambar')->store('news', 'public');
+        }
 
-        News::create([
-            'gambar' => $path,
-            'kategorinews_id' => $request->kategori_id,
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'tanggal_upload' => $request->tanggal_upload,
-            'user_id' => Auth::id(),
-        ]);
+        $data['user_id'] = Auth::id();
+
+        News::create($data);
 
         return redirect()->route('news.index')->with('success', 'Data berhasil disimpan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(News $news)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(News $news)
     {
         $kategorinews = KategoriNews::all();
         return view('news.edit', compact('news', 'kategorinews'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
-        $request->validate([
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'kategori_id' => 'required|exists:kategori_news,id',
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'tanggal_upload' => 'required|date',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('gambar')) {
             if ($news->gambar && Storage::disk('public')->exists($news->gambar)) {
                 Storage::disk('public')->delete($news->gambar);
             }
-
-            $path = $request->file('gambar')->store('news', 'public');
-            $news->gambar = $path;
+            $data['gambar'] = $request->file('gambar')->store('news', 'public');
         }
 
-        $news->kategorinews_id = $request->kategori_id;
-        $news->judul = $request->judul;
-        $news->deskripsi = $request->deskripsi;
-        $news->tanggal_upload = $request->tanggal_upload;
+        $data['user_id'] = Auth::id();
 
-        $news->user_id = Auth::id();
-
-        $news->save();
+        $news->update($data);
 
         return redirect()->route('news.index')->with('success', 'Data berhasil diupdate.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(News $news)
     {
         if ($news->gambar && Storage::disk('public')->exists($news->gambar)) {

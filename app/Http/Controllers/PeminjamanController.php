@@ -10,6 +10,7 @@ use App\Exports\PeminjamanExport;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\PeminjamanDisetujuiMail;
+use Illuminate\Support\Facades\Storage;
 
 class PeminjamanController extends Controller
 {
@@ -79,9 +80,11 @@ class PeminjamanController extends Controller
             'inventori_id' => 'required|exists:inventori,id',
             'nama_peminjam' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
+            'no_telp'       => 'required|integer|min:10',
+            'ktm'           => 'required|image|mimes:jpg,jpeg,png|max:4096',
             'email'         => 'required|email|string|max:255',
             'tanggal_pinjam' => 'required|date',
-            'tanggal_kembali' => 'nullable|date|after_or_equal:tanggal_pinjam',
+            'tanggal_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
             'jumlah_pinjam' => 'required|integer|min:1',
             'tujuan' => 'required|string',
         ]);
@@ -90,6 +93,11 @@ class PeminjamanController extends Controller
 
         if ($validated['jumlah_pinjam'] > $inventory->jumlah) {
             return back()->withErrors(['jumlah_pinjam' => 'Jumlah pinjam melebihi stok tersedia.']);
+        }
+
+        if ($request->hasFile('ktm')) {
+            $ktmPath = $request->file('ktm')->store('ktm', 'public');
+            $validated['ktm'] = $ktmPath;
         }
 
         $validated['status'] = 'menunggu';
