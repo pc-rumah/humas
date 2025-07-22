@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('inventori_id')->constrained('inventori')->cascadeOnDelete();
             $table->string('nama_peminjam');
             $table->string('nama_kegiatan');
             $table->string('ktm');
@@ -22,8 +21,8 @@ return new class extends Migration
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali')->nullable();
             $table->enum('status', ['menunggu', 'disetujui', 'dikembalikan'])->default('menunggu');
-            $table->integer('jumlah_pinjam')->default(1);
             $table->text('tujuan')->nullable();
+            $table->string('barang_dipinjam');
             $table->timestamps();
         });
     }

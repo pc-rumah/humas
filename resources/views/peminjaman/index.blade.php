@@ -80,7 +80,14 @@
                                         <h6 class="fw-semibold mb-1">{{ $item->nama_peminjam }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->inventori->nama_barang }}</h6>
+                                        <h6 class="fw-semibold mb-1">
+                                            @foreach (json_decode($item->barang_dipinjam, true) as $barang)
+                                                <div>
+                                                    {{ $inventoriMap[$barang['inventori_id']]->nama_barang ?? 'Barang tidak ditemukan' }}
+                                                    ({{ $barang['jumlah_pinjam'] }})
+                                                </div>
+                                            @endforeach
+                                        </h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">{{ $item->nama_kegiatan }}</h6>

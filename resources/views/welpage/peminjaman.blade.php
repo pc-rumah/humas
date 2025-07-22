@@ -75,19 +75,32 @@
                                 value="{{ old('email') }}" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="inventori_id">Nama Barang</label>
-                            <select name="inventori_id" id="inventori_id" class="form-select" required>
-                                <option value="" disabled {{ old('inventori_id') ? '' : 'selected' }}>Pilih Barang
-                                </option>
-                                @foreach ($inventori as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ old('inventori_id') == $item->id ? 'selected' : '' }}>
-                                        {{ $item->nama_barang }} (Stok = {{ $item->jumlah }})
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div id="barang-container">
+                            <div class="barang-group">
+                                <div class="form-group">
+                                    <label for="inventori_id[]">Nama Barang</label>
+                                    <select name="inventori_id[]" class="form-select" required>
+                                        <option value="" disabled selected>Pilih Barang</option>
+                                        @foreach ($inventori as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->nama_barang }} (Stok = {{ $item->jumlah }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="jumlah_pinjam[]">Jumlah Pinjam</label>
+                                    <input type="number" name="jumlah_pinjam[]" min="1" class="form-input"
+                                        required>
+                                </div>
+
+                                <br>
+                                <button type="button" class="remove-barang btn btn-danger">Hapus</button>
+                            </div>
                         </div>
+
+                        <button type="button" id="add-barang" class="btn btn-secondary">Tambah Barang</button>
 
                         <div class="form-group">
                             <label for="tanggal_pinjam">Tanggal Pinjam</label>
@@ -99,12 +112,6 @@
                             <label for="tanggal_kembali">Tanggal Kembali</label>
                             <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-input"
                                 value="{{ old('tanggal_kembali') }}" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="jumlah">Jumlah Pinjam</label>
-                            <input type="number" name="jumlah_pinjam" id="jumlah" min="1" class="form-input"
-                                value="{{ old('jumlah_pinjam') }}" required>
                         </div>
 
                         <div class="form-group">
@@ -135,18 +142,32 @@
                         @forelse ($peminjaman as $item)
                             <div class="history-item">
                                 <div class="history-item-header">
-                                    <h3 class="history-item-title">{{ $item->inventori->nama_barang }}</h3>
+                                    <h3 class="history-item-title">
+                                        @php
+                                            $barangList = json_decode($item->barang_dipinjam, true);
+                                        @endphp
+
+                                        @foreach ($barangList as $barang)
+                                            {{ $inventoriMap[$barang['inventori_id']]->nama_barang ?? 'Barang tidak ditemukan' }}
+                                            ({{ $barang['jumlah_pinjam'] }} unit)
+                                            <br>
+                                        @endforeach
+
+                                    </h3>
+
                                     <span class="status-badge {{ $item->status }}">
                                         {!! getStatusIcon($item->status) !!} {{ ucfirst($item->status) }}
                                     </span>
                                 </div>
+
                                 <div class="history-item-dates">
                                     <span class="date-icon">📅</span>
                                     <span>{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('m/d/Y') }} -
-                                        {{ \Carbon\Carbon::parse($item->tanggal_kembali)->format('m/d/Y') }}</span>
+                                        {{ \Carbon\Carbon::parse($item->tanggal_kembali)->format('m/d/Y') }}
+                                    </span>
                                 </div>
+
                                 <div class="history-item-details">
-                                    <div class="history-item-quantity">Jumlah: {{ $item->jumlah_pinjam }}</div>
                                     <div class="history-item-purpose">Tujuan: {{ $item->tujuan }}</div>
                                 </div>
                             </div>
@@ -157,6 +178,7 @@
                             </div>
                         @endforelse
                     </div>
+
                 </div>
             </div>
         </div>
@@ -174,6 +196,22 @@
                     setTimeout(() => msg.remove(), 500);
                 }, 5000);
             });
+        });
+
+        document.getElementById('add-barang').addEventListener('click', function() {
+            let container = document.getElementById('barang-container');
+            let newGroup = container.querySelector('.barang-group').cloneNode(true);
+            newGroup.querySelectorAll('input, select').forEach(el => el.value = '');
+            container.appendChild(newGroup);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-barang')) {
+                let group = e.target.closest('.barang-group');
+                if (document.querySelectorAll('.barang-group').length > 1) {
+                    group.remove();
+                }
+            }
         });
     </script>
 </body>

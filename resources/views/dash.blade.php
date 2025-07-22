@@ -114,27 +114,48 @@
                                                         <h6 class="fw-semibold mb-1">{{ $item->nama_peminjam }}</h6>
                                                     </td>
                                                     <td class="border-bottom-0">
-                                                        <p class="mb-0 fw-normal"> {{ $item->nama_kegiatan }}</p>
+                                                        <p class="mb-0 fw-normal">{{ $item->nama_kegiatan }}</p>
                                                     </td>
                                                     <td class="border-bottom-0">
                                                         <div class="d-flex align-items-center gap-2">
                                                             <span class="badge bg-primary rounded-3 fw-semibold">
-                                                                {{ $item->status }} </span>
+                                                                {{ $item->status }}
+                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td class="border-bottom-0">
-                                                        <h6 class="fw-semibold mb-0 fs-4">
-                                                            {{ $item->inventori->nama_barang }}</h6>
+                                                        @php
+                                                            $barangList = json_decode($item->barang_dipinjam, true);
+                                                        @endphp
+                                                        <ul class="mb-0 ps-3">
+                                                            @foreach ($barangList as $barang)
+                                                                @php
+                                                                    $inventori = \App\Models\Inventory::find(
+                                                                        $barang['inventori_id'],
+                                                                    );
+                                                                @endphp
+                                                                <li>{{ $inventori->nama_barang ?? 'Barang tidak ditemukan' }}
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
                                                     </td>
                                                     <td class="border-bottom-0">
-                                                        <h6 class="fw-semibold mb-0 fs-4">{{ $item->jumlah_pinjam }}
-                                                        </h6>
+                                                        <ul class="mb-0 ps-3">
+                                                            @foreach ($barangList as $barang)
+                                                                <li>{{ $barang['jumlah_pinjam'] }}</li>
+                                                            @endforeach
+                                                        </ul>
                                                     </td>
                                                 </tr>
                                             @empty
-                                                <h4>tidak ada data</h4>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <h4 class="text-center">Tidak ada data</h4>
+                                                    </td>
+                                                </tr>
                                             @endforelse
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>

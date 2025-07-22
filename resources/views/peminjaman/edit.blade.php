@@ -11,8 +11,18 @@
                         @method('PUT')
 
                         <p><strong>Peminjam:</strong> {{ $peminjaman->nama_peminjam }}</p>
-                        <p><strong>Barang:</strong> {{ $peminjaman->inventori->nama_barang }}</p>
-                        <p><strong>Jumlah Pinjam:</strong> {{ $peminjaman->jumlah_pinjam }}</p>
+                        <p><strong>Barang:</strong> @php
+                            $barangList = json_decode($peminjaman->barang_dipinjam, true);
+                            $inventoriMap = \App\Models\Inventory::all()->keyBy('id');
+                        @endphp
+
+                            @foreach ($barangList as $barang)
+                                <li>
+                                    {{ $inventoriMap[$barang['inventori_id']]->nama_barang ?? 'Barang tidak ditemukan' }} -
+                                    {{ $barang['jumlah_pinjam'] }} unit
+                                </li>
+                            @endforeach
+                        </p>
 
                         <div class="mb-2">
                             <label for="status" class="block font-medium mb-1">Status</label>

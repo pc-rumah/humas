@@ -10,7 +10,12 @@
             <div class="row mb-3">
                 <div class="col-6 mb-2">
                     <small class="text-muted">Nama Barang</small>
-                    <div class="fw-semibold">{{ $peminjaman->inventori->nama_barang }}</div>
+                    @foreach (json_decode($peminjaman->barang_dipinjam, true) as $barang)
+                        <li>
+                            {{ $inventoriMap[$barang['inventori_id']]->nama_barang ?? 'Barang tidak ditemukan' }}
+                            - Jumlah: {{ $barang['jumlah_pinjam'] }} unit
+                        </li>
+                    @endforeach
                 </div>
                 <div class="col-6 mb-2">
                     <small class="text-muted">Nama Kegiatan</small>
@@ -56,10 +61,6 @@
                                 <span class="badge bg-secondary text-white">{{ $peminjaman->status }}</span>
                         @endswitch
                     </div>
-                </div>
-                <div class="col-6 mb-2">
-                    <small class="text-muted">Jumlah</small>
-                    <div class="fw-semibold">{{ $peminjaman->jumlah_pinjam }}</div>
                 </div>
                 <div class="col-12 mb-2">
                     <small class="text-muted">Catatan</small>

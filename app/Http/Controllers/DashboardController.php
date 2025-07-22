@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Letter;
 use App\Models\Inventory;
 use App\Models\Peminjaman;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -21,14 +20,22 @@ class DashboardController extends Controller
 
     public function getChartData()
     {
-        $totalDipinjam = DB::table('peminjaman')
-            ->where('status', 'disetujui')
-            ->sum('jumlah_pinjam');
+        $peminjaman = Peminjaman::where('status', 'disetujui')->get();
 
-        $totalTersedia = DB::table('inventori')->sum('jumlah');
+        $totalDipinjam = 0;
+        foreach ($peminjaman as $item) {
+            $barangList = json_decode($item->barang_dipinjam, true);
+
+            foreach ($barangList as $barang) {
+                $totalDipinjam += $barang['jumlah_pinjam'];
+            }
+        }
+
+        $totalTersedia = Inventory::sum('jumlah');
+
         return response()->json([
             'labels' => ['Tersedia', 'Dipinjam'],
-            'data' => [($totalTersedia - $totalDipinjam), $totalDipinjam]
+            'data' => [($totalTersedia), $totalDipinjam]
         ]);
     }
 }
