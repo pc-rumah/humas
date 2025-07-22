@@ -17,7 +17,9 @@ class PeminjamanController extends Controller
     public function home()
     {
         $peminjaman = Peminjaman::all();
-        $inventori = Inventory::where('jumlah', '>', 0)->get();
+        $inventori = Inventory::where('jumlah', '>', 0)
+            ->where('status', 'tersedia')
+            ->get();
         return view('welpage.peminjaman', compact('peminjaman', 'inventori'));
     }
 
@@ -80,7 +82,7 @@ class PeminjamanController extends Controller
             'inventori_id' => 'required|exists:inventori,id',
             'nama_peminjam' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
-            'no_telp'       => 'required|integer|min:10',
+            'no_telp' => 'required|regex:/^08[0-9]{4,11}$/',
             'ktm'           => 'required|image|mimes:jpg,jpeg,png|max:4096',
             'email'         => 'required|email|string|max:255',
             'tanggal_pinjam' => 'required|date',

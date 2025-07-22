@@ -75,11 +75,11 @@
                                 </div>
                                 <p class="item-description">{{ $item->deskripsi }}</p>
                                 <div class="item-details">
-                                    <span class="item-category">Category: {{ $item->kategori->nama_kategori }}</span>
-                                    <span class="item-stock">Stock: {{ $item->jumlah }}</span>
+                                    <span class="item-category">Kategori: {{ $item->kategori->nama_kategori }}</span>
+                                    <span class="item-stock">Stok: {{ $item->jumlah }}</span>
                                 </div>
                                 <div class="item-condition condition-{{ strtolower($item->status) }}">
-                                    <span>Condition: {{ $item->status }}</span>
+                                    <span>Kondisi: {{ $item->status }}</span>
                                     @if ($item->jumlah <= 2 && $item->jumlah > 0)
                                         <span class="warning-icon">⚠️</span>
                                     @endif
@@ -89,7 +89,7 @@
                     @empty
                         <div class="no-results" style="display: none;">
                             <div class="no-results-icon">📦</div>
-                            <p>No items found.</p>
+                            <p>Tidak ada Item</p>
                         </div>
                     @endforelse
                 </div>

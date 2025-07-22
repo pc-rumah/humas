@@ -105,11 +105,11 @@
                             <div class="history-item">
                                 <div class="history-item-details">
                                     <div class="detail-row">
-                                        <span class="detail-label">Recipient:</span>
+                                        <span class="detail-label">Nama:</span>
                                         <span class="detail-value">{{ $item->nama_pemohon }}</span>
                                     </div>
                                     <div class="detail-row">
-                                        <span class="detail-label">Purpose:</span>
+                                        <span class="detail-label">Tujuan:</span>
                                         <span class="detail-value">{{ $item->instansi }}</span>
                                     </div>
                                     <div class="date-info">
@@ -133,7 +133,7 @@
                         @empty
                             <div class="empty-history">
                                 <div class="empty-history-icon">📄</div>
-                                <p>No letter requests found.</p>
+                                <p>Tidak ada Item.</p>
                             </div>
                         @endforelse
                     </div>
@@ -142,7 +142,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     @include('partwelcome.footer')
     <script>
         document.addEventListener("DOMContentLoaded", function() {

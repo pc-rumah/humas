@@ -65,7 +65,7 @@
 
                         <div class="form-group">
                             <label for="no_telp">No Telp</label>
-                            <input type="number" name="no_telp" id="no_telp" class="form-input" placeholder="no_telp"
+                            <input type="text" name="no_telp" id="no_telp" class="form-input" placeholder="no_telp"
                                 value="{{ old('no_telp') }}" required>
                         </div>
 

@@ -59,7 +59,6 @@
                     </div>
                 </div>
 
-                <!-- Agenda Section -->
                 <div class="agenda-section">
                     <div class="section-header">
                         <h2>📅 Agenda Mendatang</h2>
@@ -96,7 +95,7 @@
                         @empty
                             <div class="empty-state">
                                 <div class="empty-state-icon">📅</div>
-                                <p>No agenda items found.</p>
+                                <p>Tidak ada Agenda.</p>
                             </div>
                         @endforelse
                     </div>
