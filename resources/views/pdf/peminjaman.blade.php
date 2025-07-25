@@ -35,21 +35,32 @@
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
                 <th>Status</th>
-                <th>Jumlah</th>
-                <th>Catatan</th>
+                <th>Tujuan</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($peminjaman as $item)
+                {{-- Melakukan iterasi (perulangan) untuk setiap data dalam variabel $peminjaman. --}}
+                @php
+                    $barangList = json_decode($item->barang_dipinjam, true); // mengubah string json menjadi array
+                    $daftarBarang = collect($barangList)
+                        ->map(function ($barang) {
+                            $inventori = \App\Models\Inventory::find($barang['inventori_id']);
+                            return ($inventori->nama_barang ?? 'Barang Tidak Ditemukan') .
+                                ' (' .
+                                $barang['jumlah_pinjam'] .
+                                ')';
+                        })
+                        ->implode(', ');
+                @endphp
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama_peminjam }}</td>
-                    <td>{{ $item->inventori->nama_barang }}</td>
+                    <td>{{ $daftarBarang }}</td>
                     <td>{{ $item->tanggal_pinjam }}</td>
                     <td>{{ $item->tanggal_kembali }}</td>
                     <td>{{ $item->status }}</td>
-                    <td>{{ $item->jumlah_pinjam }}</td>
-                    <td>{{ $item->catatan }}</td>
+                    <td>{{ $item->tujuan }}</td>
                 </tr>
             @endforeach
         </tbody>

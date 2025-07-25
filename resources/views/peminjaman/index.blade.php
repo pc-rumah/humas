@@ -3,7 +3,6 @@
 @section('content')
     <div class="card w-100">
         <div class="card-body p-4">
-            {{-- <a class="btn btn-primary m-1" href="{{ route('peminjaman.create') }}">Peminjaman</a> --}}
             <a class="btn btn-secondary m-1" href="{{ route('peminjaman.export') }}">Export PDF</a>
             <a class="btn btn-warning m-1" href="{{ route('peminjaman.export.excel') }}">Export EXCEL</a>
             <form method="GET" class="row g-3 mb-4">

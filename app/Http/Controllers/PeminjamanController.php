@@ -155,13 +155,11 @@ class PeminjamanController extends Controller
         $oldStatus = $peminjaman->status;
         $newStatus = $validated['status'];
 
-        // Ambil data barang yang dipinjam
         $barangList = json_decode($peminjaman->barang_dipinjam, true);
 
         DB::beginTransaction();
 
         try {
-            // Jika status disetujui, kurangi stok
             if ($newStatus === 'disetujui' && $oldStatus !== 'disetujui') {
                 foreach ($barangList as $barang) {
                     $inventori = Inventory::findOrFail($barang['inventori_id']);
@@ -173,19 +171,16 @@ class PeminjamanController extends Controller
                     }
                 }
 
-                // Kurangi stok setelah validasi semua
                 foreach ($barangList as $barang) {
                     $inventori = Inventory::find($barang['inventori_id']);
                     $inventori->decrement('jumlah', $barang['jumlah_pinjam']);
                 }
 
-                // Kirim email ke user
                 if ($peminjaman->email) {
                     Mail::to($peminjaman->email)->send(new PeminjamanDisetujuiMail($peminjaman));
                 }
             }
 
-            // Jika status dikembalikan, tambahkan stok
             if ($newStatus === 'dikembalikan' && $oldStatus !== 'dikembalikan') {
                 foreach ($barangList as $barang) {
                     $inventori = Inventory::find($barang['inventori_id']);
@@ -193,7 +188,6 @@ class PeminjamanController extends Controller
                 }
             }
 
-            // Simpan perubahan status
             $peminjaman->update(['status' => $newStatus]);
 
             DB::commit();
@@ -203,7 +197,6 @@ class PeminjamanController extends Controller
             return back()->withErrors(['status' => 'Gagal memperbarui status: ' . $e->getMessage()]);
         }
     }
-
 
     public function destroy(Peminjaman $peminjaman)
     {

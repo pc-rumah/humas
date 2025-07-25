@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        <button type="button" id="add-barang" class="btn btn-secondary">Tambah Barang</button>
+                        <button type="button" id="add-barang" class="btn btn-primary">Tambah Barang</button>
 
                         <div class="form-group">
                             <label for="tanggal_pinjam">Tanggal Pinjam</label>
