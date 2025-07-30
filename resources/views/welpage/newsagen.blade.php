@@ -23,14 +23,21 @@
                 <div class="agenda-section">
                     <div class="section-header">
                         <h2>📅 Agenda Mendatang</h2>
-                        {{-- <div class="filter-controls">
-                            <select id="agendaFilter" class="filter-select">
-                                <option value="">Filter</option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->id }}"> {{ $item->nama_kategori }} </option>
-                                @endforeach
-                            </select>
-                        </div> --}}
+                        <div class="filter-controls">
+                            <form method="GET" action="/newsagenda">
+                                <select name="filter" id="agendaFilter" class="filter-select"
+                                    onchange="this.form.submit()">
+                                    <option value="">Semua Waktu</option>
+                                    <option value="week" {{ request('filter') == 'week' ? 'selected' : '' }}>Minggu
+                                        Ini</option>
+                                    <option value="month" {{ request('filter') == 'month' ? 'selected' : '' }}>Bulan
+                                        Ini</option>
+                                    <option value="year" {{ request('filter') == 'year' ? 'selected' : '' }}>Tahun Ini
+                                    </option>
+                                </select>
+                            </form>
+                        </div>
+
                     </div>
                     <div class="agenda-grid" id="agendaGrid">
                         @forelse ($agenda as $item)
@@ -61,47 +68,12 @@
                                 <p>Tidak ada Agenda.</p>
                             </div>
                         @endforelse
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
     @include('partwelcome.footer')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const agendaFilter = document.getElementById('agendaFilter');
-            const agendaItems = document.querySelectorAll('#agendaGrid .agenda-card');
-
-            agendaFilter.addEventListener('change', function() {
-                const selected = this.value;
-                agendaItems.forEach(item => {
-                    if (selected === '') {
-                        item.style.display = 'block';
-                    } else {
-                        const categorySpan = item.querySelector('.agenda-type');
-                        if (categorySpan && categorySpan.textContent.trim() == getCategoryNameById(
-                                selected)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    }
-                });
-            });
-
-            const kategoriMap = {
-                @foreach ($kategori as $item)
-                    "{{ $item->id }}": "{{ $item->nama_kategori }}",
-                @endforeach
-            };
-
-            function getCategoryNameById(id) {
-                return kategoriMap[id] || '';
-            }
-        });
-    </script>
-
 </body>
 
 </html>
