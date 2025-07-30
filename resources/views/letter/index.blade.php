@@ -63,7 +63,10 @@
                                             {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d-m-Y') }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->waktu_kegiatan }}</h6>
+                                        <h6 class="fw-semibold mb-1">
+                                            {{ \Carbon\Carbon::createFromFormat('H:i', $item->waktu_mulai_kegiatan)->format('H:i') }}
+                                            -
+                                            {{ $item->waktu_selesai_kegiatan }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">{{ $item->lokasi_kegiatan }}</h6>

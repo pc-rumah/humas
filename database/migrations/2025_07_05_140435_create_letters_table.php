@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('nama_pemohon');
             $table->string('nama_kegiatan');
             $table->string('instansi');
-            $table->date('tanggal_kegiatan');
-            $table->string('waktu_kegiatan');
+            $table->date('tanggal_mulai_kegiatan');
+            $table->date('tanggal_selesai_kegiatan')->nullable();
+            $table->string('waktu_mulai_kegiatan');
+            $table->string('waktu_selesai_kegiatan');
             $table->string('lokasi_kegiatan');
             $table->string('detail_foto');
             $table->string('upload_surat')->nullable();
+            $table->enum('status', ['menunggu', 'disetujui'])->default('menunggu');
             $table->timestamps();
         });
     }

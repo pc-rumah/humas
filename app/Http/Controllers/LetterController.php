@@ -34,14 +34,16 @@ class LetterController extends Controller
     public function storeUser(Request $request)
     {
         $validated = $request->validate([
-            'nama_pemohon'     => 'required|string|max:255',
-            'nama_kegiatan'     => 'required|string|max:255',
-            'instansi'         => 'required|string|max:255',
-            'tanggal_kegiatan' => 'required|date',
-            'waktu_kegiatan'   => 'required|string|max:255',
-            'lokasi_kegiatan'  => 'required|string|max:255',
-            'detail_foto'      => 'required|string|max:255',
-            'upload_surat'     => 'nullable|file|max:20480',
+            'nama_pemohon'             => 'required|string|max:255',
+            'nama_kegiatan'           => 'required|string|max:255',
+            'instansi'                => 'required|string|max:255',
+            'tanggal_mulai_kegiatan'  => 'required|date',
+            'tanggal_selesai_kegiatan' => 'nullable|date|after_or_equal:tanggal_mulai_kegiatan',
+            'waktu_mulai_kegiatan'    => 'required|date_format:H:i',
+            'waktu_selesai_kegiatan'  => 'required|date_format:H:i',
+            'lokasi_kegiatan'         => 'required|string|max:255',
+            'detail_foto'             => 'required|string|max:255',
+            'upload_surat'            => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:20480',
         ]);
 
         $uploadPath = null;
@@ -50,14 +52,16 @@ class LetterController extends Controller
         }
 
         $permohonan = Letter::create([
-            'nama_pemohon'     => $validated['nama_pemohon'],
-            'nama_kegiatan'    => $validated['nama_kegiatan'],
-            'instansi'         => $validated['instansi'],
-            'tanggal_kegiatan' => $validated['tanggal_kegiatan'],
-            'waktu_kegiatan'   => $validated['waktu_kegiatan'],
-            'lokasi_kegiatan'  => $validated['lokasi_kegiatan'],
-            'detail_foto'      => $validated['detail_foto'],
-            'upload_surat'     => $uploadPath,
+            'nama_pemohon'             => $validated['nama_pemohon'],
+            'nama_kegiatan'            => $validated['nama_kegiatan'],
+            'instansi'                 => $validated['instansi'],
+            'tanggal_mulai_kegiatan'   => $validated['tanggal_mulai_kegiatan'],
+            'tanggal_selesai_kegiatan' => $validated['tanggal_selesai_kegiatan'] ?? null,
+            'waktu_mulai_kegiatan'     => $validated['waktu_mulai_kegiatan'],
+            'waktu_selesai_kegiatan'   => $validated['waktu_selesai_kegiatan'],
+            'lokasi_kegiatan'          => $validated['lokasi_kegiatan'],
+            'detail_foto'              => $validated['detail_foto'],
+            'upload_surat'             => $uploadPath,
         ]);
 
         $waNumber = '6283866907175';

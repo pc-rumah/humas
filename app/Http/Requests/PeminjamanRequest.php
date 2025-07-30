@@ -34,7 +34,6 @@ class PeminjamanRequest extends FormRequest
             'email'         => 'required|email|string|max:255',
             'tanggal_pinjam' => 'required|date',
             'tanggal_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
-            'tujuan'        => 'required|string',
         ];
     }
 }

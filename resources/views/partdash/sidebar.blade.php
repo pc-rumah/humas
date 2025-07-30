@@ -26,6 +26,18 @@
                 </li>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Carousel</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('carousel.create') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Gambar</span>
+                    </a>
+                </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">INVENTORY</span>
                 </li>
                 <li class="sidebar-item">
@@ -57,7 +69,7 @@
                 </li>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">News & Agenda</span>
+                    <span class="hide-menu">Agenda</span>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ Request::is('kategorinews.*') ? 'active' : '' }}"
@@ -65,10 +77,10 @@
                         <span>
                             <i class="ti ti-article"></i>
                         </span>
-                        <span class="hide-menu">Kategori News & Agenda</span>
+                        <span class="hide-menu">Kategori Agenda</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a class="sidebar-link {{ Request::is('news*') ? 'active' : '' }}" href="{{ route('news.index') }}"
                         aria-expanded="false">
                         <span>
@@ -76,7 +88,7 @@
                         </span>
                         <span class="hide-menu">News</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ Request::is('agenda*') ? 'active' : '' }}"
                         href="{{ route('agenda.index') }}" aria-expanded="false">
@@ -92,7 +104,19 @@
                         <span>
                             <i class="ti ti-article"></i>
                         </span>
-                        <span class="hide-menu">Letter</span>
+                        <span class="hide-menu">Surat</span>
+                    </a>
+                </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Generative</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="https://chatgpt.com/" target="_blank" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">AI</span>
                     </a>
                 </li>
             </ul>

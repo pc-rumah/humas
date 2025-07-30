@@ -16,56 +16,27 @@
     <section class="hero-carousel">
         <div class="swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Office Team Meeting">
-                    <div class="slide-content">
-                        <div class="container">
-                            <h1>Tim Kolaborasi Profesional</h1>
-                            <p>Rasakan tim kerja yang lancar dan komunikasi yang efisien dengan layanan hubungan
-                                masyarakat kami yang komprehensif.</p>
-                            <div class="slide-buttons">
-                                <a href="#services" class="btn btn-primary">Memulai</a>
-                                <a href="#services" class="btn btn-secondary">Pelajari Lebih Lanjut</a>
-                            </div>
+                @if ($carousel)
+                    @if ($carousel->gambar_1)
+                        <div class="swiper-slide">
+                            <img style="border: 1px solid white; border-radius: 18px"
+                                src="{{ asset('storage/' . $carousel->gambar_1) }}" alt="Slide 1">
                         </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Modern Office Space">
-                    <div class="slide-content">
-                        <div class="container">
-                            <h1>Solusi Ruang Kerja Modern</h1>
-                            <p>Menampilkan alur kerja Anda dengan sistem manajemen inventaris dan penyimpanan dokumen
-                                kami
-                                yang inovatif.</p>
-                            <div class="slide-buttons">
-                                <a href="/inven" class="btn btn-primary">Inventaris</a>
-                                <a href="#services" class="btn btn-secondary">Lihat Layanan</a>
-                            </div>
+                    @endif
+                    @if ($carousel->gambar_2)
+                        <div class="swiper-slide">
+                            <img style="border: 1px solid white; border-radius: 18px"
+                                src="{{ asset('storage/' . $carousel->gambar_2) }}" alt="Slide 2">
                         </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Business Meeting">
-                    <div class="slide-content">
-                        <div class="container">
-                            <h1>Perencanaan Bisnis Strategis</h1>
-                            <p>Tetap terorganisasi dengan sistem manajemen agenda dan pembaruan berita kami yang
-                                dirancang untuk bisnis modern.</p>
-                            <div class="slide-buttons">
-                                <a href="/newsagenda" class="btn btn-primary">Lihat Berita & Agenda</a>
-                                <a href="/newsagenda" class="btn btn-secondary">Pembaruan Terbaru</a>
-                            </div>
+                    @endif
+                    @if ($carousel->gambar_3)
+                        <div class="swiper-slide">
+                            <img style="border: 1px solid white; border-radius: 18px"
+                                src="{{ asset('storage/' . $carousel->gambar_3) }}" alt="Slide 3">
                         </div>
-                    </div>
-                </div>
+                    @endif
+                @endif
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
     </section>
 

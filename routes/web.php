@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\WelcomeController;
 Route::get('/', [WelcomeController::class, 'index']);
 
 Route::get('/pinjam', [PeminjamanController::class, 'home']);
+Route::resource('carousel', CarouselController::class);
 Route::get('inven', [InventoryController::class, 'home']);
 Route::get('/pinjam', [PeminjamanController::class, 'home']);
 Route::get('/newsagenda', [ShowNewsAgendaController::class, 'home']);

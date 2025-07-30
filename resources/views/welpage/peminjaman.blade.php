@@ -17,8 +17,8 @@
     <section class="borrowing-section">
         <div class="container">
             <div class="borrowing-header">
-                <h1>Manajemen Peminjaman</h1>
-                <p>Minta barang dan lacak riwayat peminjaman Anda</p>
+                <h1>Manajemen Peminjaman Barang</h1>
+                <p>Peminjaman Barang dan melacak riwayat peminjaman Anda</p>
             </div>
 
             <div class="borrowing-content">
@@ -59,14 +59,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="ktm">Upload KTM</label>
+                            <label for="ktm">Upload KTM atau ID Card</label>
                             <input type="file" name="ktm" id="ktm" class="form-input" required>
                         </div>
 
                         <div class="form-group">
                             <label for="no_telp">No Telp</label>
-                            <input type="text" name="no_telp" id="no_telp" class="form-input" placeholder="no_telp"
-                                value="{{ old('no_telp') }}" required>
+                            <input type="text" name="no_telp" id="no_telp" class="form-input"
+                                placeholder="No Telp Memakai Format 08" value="{{ old('no_telp') }}" required>
                         </div>
 
                         <div class="form-group">
@@ -88,7 +88,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-
+                                <br>
                                 <div class="form-group">
                                     <label for="jumlah_pinjam[]">Jumlah Pinjam</label>
                                     <input type="number" name="jumlah_pinjam[]" min="1" class="form-input"
@@ -112,11 +112,6 @@
                             <label for="tanggal_kembali">Tanggal Kembali</label>
                             <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-input"
                                 value="{{ old('tanggal_kembali') }}" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tujuan">Tujuan</label>
-                            <textarea name="tujuan" id="tujuan" class="form-textarea" rows="4" required>{{ old('tujuan') }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary submit-btn">Submit Request</button>

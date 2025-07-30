@@ -17,8 +17,8 @@
     <section class="letters-section">
         <div class="container">
             <div class="letters-header">
-                <h1>Manajemen Permintaan Surat</h1>
-                <p>Permintaan surat dan dokumen resmi dengan pemrosesan otomatis</p>
+                <h1>Manajemen Permintaan Dokumentasi</h1>
+                <p>Permintaan dokumen resmi dengan pemrosesan otomatis</p>
             </div>
 
             <div class="letters-content">
@@ -40,7 +40,7 @@
                             </ul>
                         </div>
                     @endif
-                    <h2>Request Letter</h2>
+                    <h2>Permintaan Dokumentasi</h2>
                     <form class="request-form" id="letterForm" action="{{ route('letter.storeUser') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label for="nama_kegiatan">Nama Kegiatan</label>
                             <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-input"
-                                placeholder="Masukkan nama lengkap" required>
+                                placeholder="Masukkan nama kegiatan" required>
                         </div>
 
                         <div class="form-group">
@@ -64,33 +64,53 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tanggal_kegiatan">Tanggal Kegiatan</label>
-                            <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan" class="form-input"
-                                required>
+                            <label for="tanggal_mulai_kegiatan">Tanggal Mulai Kegiatan</label>
+                            <input type="date" name="tanggal_mulai_kegiatan" id="tanggal_mulai_kegiatan"
+                                class="form-input" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="waktu_kegiatan">Waktu Kegiatan</label>
-                            <input type="text" name="waktu_kegiatan" id="waktu_kegiatan" class="form-input"
-                                placeholder="Contoh: 08:00 - 12:00" required>
+                            <label for="tanggal_selesai_kegiatan">Tanggal Selesai Kegiatan (Opsional)</label>
+                            <input type="date" name="tanggal_selesai_kegiatan" id="tanggal_selesai_kegiatan"
+                                class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="waktu_kegiatan">Waktu Mulai Kegiatan</label>
+                            <input type="time" name="waktu_mulai_kegiatan" id="waktu_mulai_kegiatan"
+                                class="form-input" placeholder="Contoh: 08:00 - 12:00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="waktu_kegiatan">Waktu Selesai Kegiatan</label>
+                            <input type="text" name="waktu_selesai_kegiatan" id="waktu_selesai_kegiatan"
+                                class="form-input" placeholder="Contoh: 08:00 atau selesai" required>
                         </div>
 
                         <div class="form-group">
                             <label for="lokasi_kegiatan">Lokasi Kegiatan</label>
-                            <input type="text" name="lokasi_kegiatan" id="lokasi_kegiatan" class="form-input"
-                                required>
+                            <input type="text" placeholder="contoh ruang sidang" name="lokasi_kegiatan"
+                                id="lokasi_kegiatan" class="form-input" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="detail_foto">Detail Dokumentasi</label>
-                            <input type="text" name="detail_foto" id="detail_foto" class="form-input"
+                            <label for="detail_foto">Jenis Dokumentasi</label>
+                            <select name="detail_foto" id="detail_foto" class="form-input"
                                 placeholder="Deskripsi foto kegiatan" required>
+                                <option value="foto">Dokumentasi Foto</option>
+                                <option value="foto&video">Dokumentasi Foto & Video</option>
+                                <option value="foto,video&berita">Dokumentasi Foto, Video & Berita</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="upload_surat">Upload Surat (opsional)</label>
+                            <label for="upload_surat">Upload Surat (MAX 20MB) <h4
+                                    style="font-size: 12px; color:gray; font-weight: normal;">
+                                    PNG, JPEG,
+                                    PDF
+                                </h4></label>
                             <input type="file" name="upload_surat" id="upload_surat" class="form-input"
-                                accept=".pdf,.doc,.docx,.jpg,.png">
+                                accept=".pdf,.doc,.docx,.jpg,.png" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary submit-btn">Submit Permohonan</button>
@@ -99,7 +119,7 @@
 
                 <!-- Request History -->
                 <div class="history-container">
-                    <h2>Request History</h2>
+                    <h2>Riwayat Permintaan Dokumentasi</h2>
                     <div class="history-list" id="historyList">
                         @forelse($letter as $item)
                             <div class="history-item">
@@ -121,7 +141,9 @@
                                         <div class="date-row">
                                             <span class="date-icon">🕒</span>
                                             <span>Waktu Kegiatan
-                                                {{ \Carbon\Carbon::parse($item->waktu_kegiatan)->format('m/d/Y') }}</span>
+                                                {{ \Carbon\Carbon::createFromFormat('H:i', $item->waktu_mulai_kegiatan)->format('H:i') }}
+                                                -
+                                                {{ $item->waktu_selesai_kegiatan }}</span>
                                         </div>
                                     </div>
                                     <div class="notes-section">

@@ -18,7 +18,7 @@
         <div class="container">
             <div class="inventory-header">
                 <h1>Manajemen Inventaris</h1>
-                <p>Telusuri dan kelola item yang tersedia dengan pelacakan stok secara real-time</p>
+                <p>Pengelolaan Item yang Tersedia dan Pelacakan Stok Barang secara Real-time</p>
             </div>
             @php
                 function getStockStatus($jumlah)

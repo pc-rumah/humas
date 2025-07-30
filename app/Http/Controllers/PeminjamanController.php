@@ -124,7 +124,6 @@ class PeminjamanController extends Controller
                 'no_telp' => $validated['no_telp'],
                 'tanggal_pinjam' => $validated['tanggal_pinjam'],
                 'tanggal_kembali' => $validated['tanggal_kembali'],
-                'tujuan' => $validated['tujuan'],
                 'status' => $validated['status'],
                 'barang_dipinjam' => json_encode($barangList),
             ]);
