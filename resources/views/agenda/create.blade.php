@@ -12,20 +12,6 @@
                             <form action="{{ route('agenda.store') }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="kategori" class="form-label">Kategori</label>
-                                    <select name="kategori_id" id="kategori" class="form-control" required>
-                                        <option value="" disabled {{ old('kategori') == '' ? 'selected' : '' }}>Pilih
-                                            Kategori
-                                        </option>
-                                        @foreach ($kategori as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ old('kategori') == $item->id ? 'selected' : '' }}>
-                                                {{ $item->nama_kategori }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
                                     <label for="judul" class="form-label">Judul</label>
                                     <input type="text" name="judul" id="judul" value="{{ old('judul') }}"
                                         class="form-control" required>

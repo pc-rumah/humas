@@ -3,7 +3,7 @@
 @section('content')
     <div class="card w-100">
         <div class="card-body p-4">
-            {{-- <a class="btn btn-primary m-1" href="{{ route('letter.create') }}">Tambah Surat</a> --}}
+            <h5>List Permohonan</h5>
             @include('partdash.alert')
             <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle">
@@ -22,16 +22,10 @@
                                 <h6 class="fw-semibold mb-0">Instansi</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Tanggal</h6>
+                                <h6 class="fw-semibold mb-0">Status</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Waktu</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Lokasi</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Detail</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Aksi</h6>
@@ -59,8 +53,11 @@
                                         <h6 class="fw-semibold mb-1">{{ $item->instansi }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">
-                                            {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d-m-Y') }}</h6>
+                                        @if ($item->status === 'menunggu')
+                                            <h6 class="fw-semibold mb-1 text-warning">{{ $item->status }}</h6>
+                                        @elseif ($item->status === 'disetujui')
+                                            <h6 class="fw-semibold mb-1 text-success">{{ $item->status }}</h6>
+                                        @endif
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">
@@ -69,30 +66,18 @@
                                             {{ $item->waktu_selesai_kegiatan }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->lokasi_kegiatan }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->detail_foto }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
                                         <div class="d-flex gap-2">
-                                            {{-- <a href="{{ route('news.edit', $item) }}"
-                                                class="btn btn-warning btn-sm">Edit</a> --}}
+                                            <a href="{{ route('letter.show', $item) }}"
+                                                class="btn btn-warning btn-sm">Detail</a>
                                             @if ($item->upload_surat)
                                                 <a href="{{ route('letter.download', $item->id) }}"
                                                     class="btn btn-success btn-sm" target="_blank">
-                                                    Download Surat
+                                                    Download
                                                 </a>
                                             @else
-                                                <p>Tidak ada surat yang diupload.</p>
+                                                <p>Tidak ada permohonan yang diupload.</p>
                                             @endif
-
-                                            {{-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-url="{{ route('news.destroy', $item->id) }}"
-                                                data-bs-target="#alert-hapus">Hapus</button> --}}
                                         </div>
-
-                                        @include('partdash.modal')
                                     </td>
                                 </tr>
                             @endforeach

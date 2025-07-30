@@ -64,15 +64,15 @@
                 </div>
                 <div class="service-card">
                     <div class="service-icon orange">✉️</div>
-                    <h3>Permintaan Surat</h3>
-                    <p>Permintaan surat dan dokumen resmi dengan pemrosesan otomatis</p>
+                    <h3>Permintaan Dokumentasi</h3>
+                    <p>Permintaan dokumen resmi dengan pemrosesan otomatis</p>
                     <a href="/permohonan" class="learn-more">Detail →</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon purple">📰</div>
-                    <h3>Berita & Agenda</h3>
+                    <h3>Berita</h3>
                     <p>Tetap dapatkan informasi terkini mengenai berita dan pengumuman terbaru</p>
-                    <a href="/newsagenda" class="learn-more">Detail →</a>
+                    <a href="https://unw.ac.id/berita" class="learn-more">Detail →</a>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
             <p>Rasakan kekuatan manajemen hubungan masyarakat yang efisien. Akses semua layanan kami dari satu platform
                 yang mudah digunakan.</p>
             <div class="cta-buttons">
-                <a href="/inven" class="btn btn-primary">Inventory</a>
+                <a href="/inven" class="btn btn-primary">Inventaris</a>
                 <a href="/pinjam" class="btn btn-outline">Pinjam Barang</a>
             </div>
         </div>

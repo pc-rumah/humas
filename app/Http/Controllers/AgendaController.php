@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda;
 use App\Models\KategoriNews;
+use App\Models\Letter;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
     public function index()
     {
-        $agenda = Agenda::all();
+        $agenda = Letter::where('status', 'disetujui')->get();
         return view('agenda.index', compact('agenda'));
     }
 
@@ -23,7 +24,6 @@ class AgendaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kategori_id'   => 'required|exists:kategori_news,id',
             'judul'         => 'required|string|max:255',
             'deskripsi'     => 'required|string',
             'tanggal_upload' => 'required|date',
@@ -34,7 +34,6 @@ class AgendaController extends Controller
         ]);
 
         Agenda::create([
-            'kategori_id'   => $validated['kategori_id'],
             'judul'         => $validated['judul'],
             'deskripsi'     => $validated['deskripsi'],
             'tanggal'       => $validated['tanggal_upload'],
@@ -47,9 +46,9 @@ class AgendaController extends Controller
         return redirect()->route('agenda.index')->with('success', 'Agenda berhasil ditambahkan.');
     }
 
-    public function show(Agenda $agenda)
+    public function show(Letter $agenda)
     {
-        //
+        return view('agenda.show', compact('agenda'));
     }
 
     public function edit(Agenda $agenda)
@@ -60,7 +59,6 @@ class AgendaController extends Controller
     public function update(Request $request, Agenda $agenda)
     {
         $validated = $request->validate([
-            'kategori_id'   => 'required|exists:kategorinews,id',
             'judul'         => 'required|string|max:255',
             'deskripsi'     => 'required|string',
             'tanggal_upload' => 'required|date',
@@ -71,7 +69,6 @@ class AgendaController extends Controller
         ]);
 
         $agenda->update([
-            'kategori_id'   => $validated['kategori_id'],
             'judul'         => $validated['judul'],
             'deskripsi'     => $validated['deskripsi'],
             'tanggal'       => $validated['tanggal_upload'],

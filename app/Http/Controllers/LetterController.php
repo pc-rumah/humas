@@ -11,13 +11,13 @@ class LetterController extends Controller
 {
     public function home()
     {
-        $letter = Letter::all();
+        $letter = Letter::where('status', 'menunggu')->get();
         return view('welpage.letter', compact('letter'));
     }
 
     public function index()
     {
-        $letter = Letter::all();
+        $letter = Letter::where('status', 'menunggu')->get();
         return view('letter.index', compact('letter'));
     }
 
@@ -40,11 +40,19 @@ class LetterController extends Controller
             'tanggal_mulai_kegiatan'  => 'required|date',
             'tanggal_selesai_kegiatan' => 'nullable|date|after_or_equal:tanggal_mulai_kegiatan',
             'waktu_mulai_kegiatan'    => 'required|date_format:H:i',
-            'waktu_selesai_kegiatan'  => 'required|date_format:H:i',
+            'waktu_selesai_kegiatan' => 'nullable|string|max:10',
             'lokasi_kegiatan'         => 'required|string|max:255',
             'detail_foto'             => 'required|string|max:255',
             'upload_surat'            => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:20480',
         ]);
+
+        if (
+            $request->waktu_selesai_kegiatan &&
+            !preg_match('/^\d{2}:\d{2}$/', $request->waktu_selesai_kegiatan) &&
+            strtolower($request->waktu_selesai_kegiatan) !== 'selesai'
+        ) {
+            return back()->withErrors(['waktu_selesai_kegiatan' => 'Format waktu harus HH:MM atau kata "selesai".'])->withInput();
+        }
 
         $uploadPath = null;
         if ($request->hasFile('upload_surat')) {
@@ -73,7 +81,7 @@ class LetterController extends Controller
 
     public function show(Letter $letter)
     {
-        //
+        return view('letter.show', compact('letter'));
     }
 
     public function edit(Letter $letter)
@@ -83,7 +91,14 @@ class LetterController extends Controller
 
     public function update(Request $request, Letter $letter)
     {
-        //
+        $validated = $request->validate([
+            'status' => 'required|in:menunggu,disetujui',
+        ]);
+
+        $letter->status = $validated['status'];
+        $letter->save();
+
+        return redirect()->back()->with('success', 'Status surat berhasil diperbarui.');
     }
 
     public function destroy(Letter $letter)

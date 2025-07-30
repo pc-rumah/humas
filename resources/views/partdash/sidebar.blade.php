@@ -71,7 +71,7 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Agenda</span>
                 </li>
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a class="sidebar-link {{ Request::is('kategorinews.*') ? 'active' : '' }}"
                         href="{{ route('kategorinews.index') }}" aria-expanded="false">
                         <span>
@@ -79,7 +79,7 @@
                         </span>
                         <span class="hide-menu">Kategori Agenda</span>
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="sidebar-item">
                     <a class="sidebar-link {{ Request::is('news*') ? 'active' : '' }}" href="{{ route('news.index') }}"
                         aria-expanded="false">
@@ -104,7 +104,7 @@
                         <span>
                             <i class="ti ti-article"></i>
                         </span>
-                        <span class="hide-menu">Surat</span>
+                        <span class="hide-menu">Permintaan Dokumentasi</span>
                     </a>
                 </li>
                 <li class="nav-small-cap">

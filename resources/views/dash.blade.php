@@ -166,7 +166,7 @@
                     <div class="col-lg-12 d-flex align-items-stretch">
                         <div class="card w-100">
                             <div class="card-body p-4">
-                                <h5 class="card-title fw-semibold mb-4">Permohonan Surat</h5>
+                                <h5 class="card-title fw-semibold mb-4">Permohonan Dokumentasi</h5>
                                 <div class="table-responsive">
                                     <table class="table text-nowrap mb-0 align-middle">
                                         <thead class="text-dark fs-4">
@@ -184,10 +184,10 @@
                                                     <h6 class="fw-semibold mb-0">Instansi</h6>
                                                 </th>
                                                 <th class="border-bottom-0">
-                                                    <h6 class="fw-semibold mb-0">Tanggal Kegiatan</h6>
+                                                    <h6 class="fw-semibold mb-0">Tanggal Mulai Kegiatan</h6>
                                                 </th>
                                                 <th class="border-bottom-0">
-                                                    <h6 class="fw-semibold mb-0">Waktu Kegiatan</h6>
+                                                    <h6 class="fw-semibold mb-0">Waktu Mulai Kegiatan</h6>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -207,10 +207,13 @@
                                                         <p class="mb-0 fw-normal"> {{ $item->instansi }}</p>
                                                     </td>
                                                     <td class="border-bottom-0">
-                                                        <p class="mb-0 fw-normal"> {{ $item->tanggal_kegiatan }}</p>
+                                                        <p class="mb-0 fw-normal">
+                                                            {{ \Carbon\Carbon::parse($item->tanggal_mulai_kegiatan)->format('d F Y') }}
+                                                        </p>
                                                     </td>
                                                     <td class="border-bottom-0">
-                                                        <p class="mb-0 fw-normal"> {{ $item->waktu_kegiatan }}</p>
+                                                        <p class="mb-0 fw-normal"> {{ $item->waktu_mulai_kegiatan }}
+                                                        </p>
                                                     </td>
                                                 </tr>
                                             @empty

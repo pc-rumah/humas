@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('agenda', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id')->constrained('kategori_news')->onDelete('cascade');
             $table->string('judul');
             $table->text('deskripsi');
             $table->date('tanggal');

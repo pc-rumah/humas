@@ -48,67 +48,71 @@
                         <div class="form-group">
                             <label for="nama_pemohon">Nama Pemohon</label>
                             <input type="text" name="nama_pemohon" id="nama_pemohon" class="form-input"
-                                placeholder="Masukkan nama lengkap" required>
+                                placeholder="Masukkan nama lengkap" value="{{ old('nama_pemohon') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="nama_kegiatan">Nama Kegiatan</label>
                             <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-input"
-                                placeholder="Masukkan nama kegiatan" required>
+                                placeholder="Masukkan nama kegiatan" value="{{ old('nama_kegiatan') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="instansi">Bagian Kerja / Prodi</label>
                             <input type="text" name="instansi" id="instansi" class="form-input"
-                                placeholder="Contoh: Teknik Informatika" required>
+                                placeholder="Contoh: Teknik Informatika" value="{{ old('instansi') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="tanggal_mulai_kegiatan">Tanggal Mulai Kegiatan</label>
                             <input type="date" name="tanggal_mulai_kegiatan" id="tanggal_mulai_kegiatan"
-                                class="form-input" required>
+                                class="form-input" value="{{ old('tanggal_mulai_kegiatan') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="tanggal_selesai_kegiatan">Tanggal Selesai Kegiatan (Opsional)</label>
                             <input type="date" name="tanggal_selesai_kegiatan" id="tanggal_selesai_kegiatan"
-                                class="form-input">
+                                class="form-input" value="{{ old('tanggal_selesai_kegiatan') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="waktu_kegiatan">Waktu Mulai Kegiatan</label>
                             <input type="time" name="waktu_mulai_kegiatan" id="waktu_mulai_kegiatan"
-                                class="form-input" placeholder="Contoh: 08:00 - 12:00" required>
+                                class="form-input" value="{{ old('waktu_mulai_kegiatan') }}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="waktu_kegiatan">Waktu Selesai Kegiatan</label>
+                            <label for="waktu_selesai_kegiatan">Waktu Selesai Kegiatan</label>
                             <input type="text" name="waktu_selesai_kegiatan" id="waktu_selesai_kegiatan"
-                                class="form-input" placeholder="Contoh: 08:00 atau selesai" required>
+                                class="form-input" placeholder="Contoh: 10:00 atau selesai"
+                                value="{{ old('waktu_selesai_kegiatan') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="lokasi_kegiatan">Lokasi Kegiatan</label>
                             <input type="text" placeholder="contoh ruang sidang" name="lokasi_kegiatan"
-                                id="lokasi_kegiatan" class="form-input" required>
+                                id="lokasi_kegiatan" class="form-input" value="{{ old('lokasi_kegiatan') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="detail_foto">Jenis Dokumentasi</label>
-                            <select name="detail_foto" id="detail_foto" class="form-input"
-                                placeholder="Deskripsi foto kegiatan" required>
-                                <option value="foto">Dokumentasi Foto</option>
-                                <option value="foto&video">Dokumentasi Foto & Video</option>
-                                <option value="foto,video&berita">Dokumentasi Foto, Video & Berita</option>
+                            <select name="detail_foto" id="detail_foto" class="form-input" required>
+                                <option value="">-- Pilih Dokumentasi --</option>
+                                <option value="foto" {{ old('detail_foto') == 'foto' ? 'selected' : '' }}>Dokumentasi
+                                    Foto</option>
+                                <option value="foto & video"
+                                    {{ old('detail_foto') == 'foto&video' ? 'selected' : '' }}>
+                                    Dokumentasi Foto & Video</option>
+                                <option value="foto, video & berita"
+                                    {{ old('detail_foto') == 'foto,video&berita' ? 'selected' : '' }}>Dokumentasi Foto,
+                                    Video & Berita</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="upload_surat">Upload Surat (MAX 20MB) <h4
-                                    style="font-size: 12px; color:gray; font-weight: normal;">
-                                    PNG, JPEG,
-                                    PDF
-                                </h4></label>
+                            <label for="upload_surat">Upload Surat (MAX 20MB)
+                                <h4 style="font-size: 12px; color:gray; font-weight: normal;">PNG, JPEG, PDF</h4>
+                            </label>
                             <input type="file" name="upload_surat" id="upload_surat" class="form-input"
                                 accept=".pdf,.doc,.docx,.jpg,.png" required>
                         </div>
@@ -136,7 +140,12 @@
                                         <div class="date-row">
                                             <span class="date-icon">📅</span>
                                             <span>Tanggal Kegiatan:
-                                                {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('m/d/Y') }}</span>
+                                                {{ \Carbon\Carbon::parse($item->tanggal_mulai_kegiatan)->format('d/m/Y') }}
+                                                @isset($item->tanggal_selesai_kegiatan)
+                                                    -
+                                                    {{ \Carbon\Carbon::parse($item->tanggal_selesai_kegiatan)->format('d/m/Y') }}
+                                                @endisset
+                                            </span>
                                         </div>
                                         <div class="date-row">
                                             <span class="date-icon">🕒</span>

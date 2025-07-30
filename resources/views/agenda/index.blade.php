@@ -3,7 +3,7 @@
 @section('content')
     <div class="card w-100">
         <div class="card-body p-4">
-            <a class="btn btn-primary m-1" href="{{ route('agenda.create') }}">Tambah Agenda</a>
+            <h5>List Agenda</h5>
             @include('partdash.alert')
             <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle">
@@ -13,25 +13,19 @@
                                 <h6 class="fw-semibold mb-0">#</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Kategori</h6>
+                                <h6 class="fw-semibold mb-0">Nama</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Judul</h6>
+                                <h6 class="fw-semibold mb-0">Nama Kegiatan</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Deskripsi</h6>
+                                <h6 class="fw-semibold mb-0">Instansi</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Tanggal</h6>
+                                <h6 class="fw-semibold mb-0">Status</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Waktu Mulai</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Waktu Selesai</h6>
-                            </th>
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Lokasi</h6>
+                                <h6 class="fw-semibold mb-0">Waktu</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Aksi</h6>
@@ -49,39 +43,33 @@
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">{{ $loop->iteration }}</h6>
                                     </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->kategorinews->nama_kategori }}</h6>
+                                    <td class="border-bottom-0 align-middle">
+                                        <h6 class="fw-semibold mb-1">{{ $item->nama_pemohon }}</h6>
                                     </td>
                                     <td class="border-bottom-0 align-middle">
-                                        <h6 class="fw-semibold mb-1">{{ $item->judul }}</h6>
+                                        <h6 class="fw-semibold mb-1">{{ $item->nama_kegiatan }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->deskripsi }}</h6>
+                                        <h6 class="fw-semibold mb-1">{{ $item->instansi }}</h6>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        @if ($item->status === 'menunggu')
+                                            <h6 class="fw-semibold mb-1 text-warning">{{ $item->status }}</h6>
+                                        @elseif ($item->status === 'disetujui')
+                                            <h6 class="fw-semibold mb-1 text-success">{{ $item->status }}</h6>
+                                        @endif
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">
-                                            {{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->waktu_mulai }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->waktu_selesai }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->lokasi }}</h6>
+                                            {{ \Carbon\Carbon::createFromFormat('H:i', $item->waktu_mulai_kegiatan)->format('H:i') }}
+                                            -
+                                            {{ $item->waktu_selesai_kegiatan }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <div class="d-flex gap-2">
-                                            <a href="{{ route('agenda.edit', $item) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
-
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-url="{{ route('agenda.destroy', $item->id) }}"
-                                                data-bs-target="#alert-hapus">Hapus</button>
+                                            <a href="{{ route('agenda.show', $item) }}"
+                                                class="btn btn-warning btn-sm">Detail</a>
                                         </div>
-
-                                        @include('partdash.modal')
                                     </td>
                                 </tr>
                             @endforeach

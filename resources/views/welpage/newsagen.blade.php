@@ -23,34 +23,36 @@
                 <div class="agenda-section">
                     <div class="section-header">
                         <h2>📅 Agenda Mendatang</h2>
-                        <div class="filter-controls">
+                        {{-- <div class="filter-controls">
                             <select id="agendaFilter" class="filter-select">
                                 <option value="">Filter</option>
                                 @foreach ($kategori as $item)
                                     <option value="{{ $item->id }}"> {{ $item->nama_kategori }} </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="agenda-grid" id="agendaGrid">
                         @forelse ($agenda as $item)
-                            <div class="agenda-card {{ strtolower($item->kategorinews->nama_kategori) }}">
-                                <div class="agenda-header">
-                                    <span
-                                        class="agenda-type {{ strtolower($item->kategorinews->nama_kategori) }}">{{ $item->kategorinews->nama_kategori }}</span>
-                                </div>
-                                <h3 class="agenda-title">{{ $item->judul }}</h3>
-                                <p class="agenda-description">{{ $item->deskripsi }}</p>
+                            <div class="agenda-card">
+                                <h3 class="agenda-title">{{ $item->nama_pemohon }}</h3>
+                                <h3 class="agenda-title">✨ Kegiatan {{ $item->nama_kegiatan }}</h3>
                                 <div class="agenda-details">
-                                    <div class="agenda-detail">📅
-                                        {{ \Carbon\Carbon::parse($item->tanggal)->diffForHumans(null, false, true) }}
+                                    <div class="agenda-detail">📅 Tanggal Mulai:
+                                        {{ \Carbon\Carbon::parse($item->tanggal_mulai_kegiatan)->format('d F Y') }}
                                     </div>
-                                    <div class="agenda-detail">⏰ {{ $item->waktu_mulai }} - {{ $item->waktu_selesai }}
+                                    @isset($item->tanggal_selesai_kegiatan)
+                                        <div class="agenda-detail">📅 Tanggal Selesai:
+                                            {{ \Carbon\Carbon::parse($item->tanggal_selesai_kegiatan)->format('d F Y') }}
+                                        </div>
+                                    @endisset
+                                    <div class="agenda-detail">⏰ Waktu Kegiatan: {{ $item->waktu_mulai_kegiatan }} -
+                                        {{ $item->waktu_selesai_kegiatan }}
                                     </div>
-                                    <div class="agenda-detail">📍 {{ $item->lokasi }}</div>
+                                    <div class="agenda-detail">📍 Lokasi Kegiatan: {{ $item->lokasi_kegiatan }}</div>
                                 </div>
                                 <div class="agenda-footer">
-                                    <div class="agenda-organizer">👤 Organized by {{ $item->organized }}</div>
+                                    <div class="agenda-organizer">Instansi: {{ $item->instansi }}</div>
                                 </div>
                             </div>
                         @empty
@@ -59,6 +61,7 @@
                                 <p>Tidak ada Agenda.</p>
                             </div>
                         @endforelse
+
                     </div>
                 </div>
             </div>
