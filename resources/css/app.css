@@ -157,10 +157,11 @@ body {
 }
 
 .swiper-slide img {
+    max-width: 1200px;
     width: 90%;
     height: 90%;
     object-fit: cover;
-    filter: brightness(0.7);
+    filter: brightness(1);
 }
 
 .slide-content {
