@@ -62,15 +62,18 @@
                         @endswitch
                     </div>
                 </div>
-                <div class="col-12 mb-2">
-                    <small class="text-muted">Catatan</small>
-                    <div class="fw-semibold">{{ $peminjaman->tujuan }}</div>
-                </div>
                 @if (isset($peminjaman->ktm))
                     <div class="mt-3">
                         <img src="{{ asset('storage/' . $peminjaman->ktm) }}" alt="KTM" class="img-thumbnail"
                             style="max-width: 200px;">
                         <div class="text-muted small mt-1">KTM</div>
+                    </div>
+                @endif
+                @if (isset($peminjaman->upload_surat))
+                    <div class="mt-3">
+                        <img src="{{ asset('storage/' . $peminjaman->upload_surat) }}" alt="upload_surat"
+                            class="img-thumbnail" style="max-width: 200px;">
+                        <div class="text-muted small mt-1">Upload Surat</div>
                     </div>
                 @endif
             </div>

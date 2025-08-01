@@ -76,7 +76,10 @@ class LetterController extends Controller
         $waText = "Halo, saya sudah mengirim surat permohonan kegiatan atas nama " . $permohonan->nama_pemohon . ". Mohon tindak lanjutnya.";
         $waUrl = 'https://wa.me/' . $waNumber . '?text=' . urlencode($waText);
 
-        return redirect()->away($waUrl);
+        return redirect()->route('letter.home')->with([
+            'success' => 'Permohonan berhasil dikirim! anda akan diarahkan ke WhatsApp dalam beberapa detik.',
+            'wa_url' => $waUrl,
+        ]);
     }
 
     public function show(Letter $letter)

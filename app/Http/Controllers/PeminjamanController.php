@@ -110,22 +110,31 @@ class PeminjamanController extends Controller
                 ];
             }
 
+            // Simpan file KTM
             if ($request->hasFile('ktm')) {
                 $validated['ktm'] = $request->file('ktm')->store('ktm', 'public');
+            }
+
+            // Simpan file Surat
+            if ($request->hasFile('upload_surat')) {
+                $validated['upload_surat'] = $request->file('upload_surat')->store('surat', 'public');
+            } else {
+                $validated['upload_surat'] = null;
             }
 
             $validated['status'] = 'menunggu';
 
             Peminjaman::create([
-                'nama_peminjam' => $validated['nama_peminjam'],
-                'nama_kegiatan' => $validated['nama_kegiatan'],
-                'ktm' => $validated['ktm'],
-                'email' => $validated['email'],
-                'no_telp' => $validated['no_telp'],
-                'tanggal_pinjam' => $validated['tanggal_pinjam'],
-                'tanggal_kembali' => $validated['tanggal_kembali'],
-                'status' => $validated['status'],
-                'barang_dipinjam' => json_encode($barangList),
+                'nama_peminjam'     => $validated['nama_peminjam'],
+                'nama_kegiatan'     => $validated['nama_kegiatan'],
+                'ktm'               => $validated['ktm'],
+                'upload_surat'      => $validated['upload_surat'],
+                'email'             => $validated['email'],
+                'no_telp'           => $validated['no_telp'],
+                'tanggal_pinjam'    => $validated['tanggal_pinjam'],
+                'tanggal_kembali'   => $validated['tanggal_kembali'],
+                'status'            => $validated['status'],
+                'barang_dipinjam'   => json_encode($barangList),
             ]);
         });
 

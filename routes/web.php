@@ -21,7 +21,7 @@ Route::resource('carousel', CarouselController::class);
 Route::get('inven', [InventoryController::class, 'home']);
 Route::get('/pinjam', [PeminjamanController::class, 'home']);
 Route::get('/newsagenda', [ShowNewsAgendaController::class, 'home']);
-Route::get('/permohonan', [LetterController::class, 'home']);
+Route::get('/permohonan', [LetterController::class, 'home'])->name('letter.home');
 Route::post('/peminjaman/user', [PeminjamanController::class, 'storeUser'])->name('peminjaman.storeUser');
 Route::post('/letter/user', [LetterController::class, 'storeUser'])->name('letter.storeUser');
 

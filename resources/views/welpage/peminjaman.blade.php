@@ -28,6 +28,17 @@
                     @if (session('success'))
                         <div class="alert alert-success fade-message">
                             {{ session('success') }}
+                            @if (session('wa_url'))
+                                <div class="mt-2">
+                                    <small class="text-muted">Redirecting to WhatsApp in <span id="countdown">3</span>
+                                        seconds...</small>
+                                    <br>
+                                    <a href="{{ session('wa_url') }}" class="btn btn-sm btn-success mt-1"
+                                        target="_blank">
+                                        <i class="fab fa-whatsapp"></i> Go to WhatsApp Now
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     @endif
 
@@ -61,6 +72,13 @@
                         <div class="form-group">
                             <label for="ktm">Upload KTM atau ID Card</label>
                             <input type="file" name="ktm" id="ktm" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="upload_surat">Upload Surat (MAX 20MB)
+                                <h4 style="font-size: 12px; color:gray; font-weight: normal;">PNG, JPEG, PDF</h4>
+                            </label>
+                            <input type="file" name="upload_surat" id="upload_surat" class="form-input">
                         </div>
 
                         <div class="form-group">
@@ -179,6 +197,7 @@
         </div>
     </section>
     @include('partwelcome.footer')
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const messages = document.querySelectorAll(".fade-message");

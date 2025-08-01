@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     @include('partwelcome.header')
 
     <!-- Letters Section -->
@@ -22,7 +21,6 @@
             </div>
 
             <div class="letters-content">
-                <!-- Request Letter Form -->
                 <div class="request-form-container">
                     @if (session('success'))
                         <div class="alert alert-success fade-message">
@@ -30,7 +28,6 @@
                         </div>
                     @endif
 
-                    {{-- Pesan Error --}}
                     @if ($errors->any())
                         <div class="alert alert-danger fade-message">
                             <ul>
@@ -100,6 +97,9 @@
                                 <option value="">-- Pilih Dokumentasi --</option>
                                 <option value="foto" {{ old('detail_foto') == 'foto' ? 'selected' : '' }}>Dokumentasi
                                     Foto</option>
+                                <option value="video" {{ old('detail_foto') == 'video' ? 'selected' : '' }}>
+                                    Dokumentasi
+                                    Video</option>
                                 <option value="foto & video"
                                     {{ old('detail_foto') == 'foto&video' ? 'selected' : '' }}>
                                     Dokumentasi Foto & Video</option>
@@ -119,6 +119,26 @@
 
                         <button type="submit" class="btn btn-primary submit-btn">Submit Permohonan</button>
                     </form>
+
+                    @if (session('success') && session('wa_url'))
+                        <script>
+                            setTimeout(function() {
+                                window.location.href = "{{ session('wa_url') }}";
+                            }, 2000);
+                        </script>
+                    @endif
+
+                    @if (session('wa_url'))
+                        <script>
+                            // Jalankan reload hanya jika halaman pernah redirect ke WhatsApp
+                            window.addEventListener('pageshow', function(event) {
+                                if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+                                    window.location.reload(true);
+                                }
+                            });
+                        </script>
+                    @endif
+
                 </div>
 
                 <!-- Request History -->
@@ -179,13 +199,10 @@
             const messages = document.querySelectorAll(".fade-message");
 
             messages.forEach(function(msg) {
-                // Fade in
                 setTimeout(() => msg.classList.add("show"), 100);
 
-                // Fade out after 5 detik
                 setTimeout(() => {
                     msg.classList.remove("show");
-                    // Hapus elemen dari DOM setelah transisi selesai
                     setTimeout(() => msg.remove(), 500);
                 }, 5000);
             });
