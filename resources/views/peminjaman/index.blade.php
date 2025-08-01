@@ -104,16 +104,21 @@
                                             <a href="{{ route('peminjaman.show', $item) }}"
                                                 class="btn btn-warning btn-sm">Detail</a>
                                             @if (Auth::user()->hasRole('admin'))
-                                                @if ($item->status != 'dikembalikan')
+                                                @if ($item->status != 'dikembalikan' && $item->status != 'ditolak')
                                                     <a href="{{ route('peminjaman.edit', $item) }}"
                                                         class="btn btn-warning btn-sm">Edit</a>
                                                 @else
                                                     <button class="btn btn-warning btn-sm" disabled>Edit</button>
                                                 @endif
 
-                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                    data-url="{{ route('peminjaman.destroy', $item->id) }}"
-                                                    data-bs-target="#alert-hapus">Hapus</button>
+                                                @if ($item->status != 'dikembalikan' && $item->status != 'ditolak')
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        data-bs-toggle="modal"
+                                                        data-url="{{ route('peminjaman.destroy', $item->id) }}"
+                                                        data-bs-target="#alert-hapus">Hapus</button>
+                                                @else
+                                                    <button class="btn btn-danger btn-sm" disabled="disabled">Hapus</button>
+                                                @endif
                                             @endif
                                         </div>
 

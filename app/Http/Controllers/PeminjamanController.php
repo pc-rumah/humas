@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\PeminjamanExport;
 use Illuminate\Support\Facades\DB;
+use App\Mail\PeminjamanDitolakMail;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\PeminjamanDisetujuiMail;
@@ -94,7 +95,6 @@ class PeminjamanController extends Controller
             foreach ($validated['inventori_id'] as $index => $inventoriId) {
                 $jumlahPinjam = $validated['jumlah_pinjam'][$index];
 
-                // Ambil inventori tanpa lock
                 $inventory = Inventory::findOrFail($inventoriId);
 
                 // Validasi stok tersedia
@@ -110,12 +110,10 @@ class PeminjamanController extends Controller
                 ];
             }
 
-            // Simpan file KTM
             if ($request->hasFile('ktm')) {
                 $validated['ktm'] = $request->file('ktm')->store('ktm', 'public');
             }
 
-            // Simpan file Surat
             if ($request->hasFile('upload_surat')) {
                 $validated['upload_surat'] = $request->file('upload_surat')->store('surat', 'public');
             } else {
@@ -157,7 +155,7 @@ class PeminjamanController extends Controller
     public function update(Request $request, Peminjaman $peminjaman)
     {
         $validated = $request->validate([
-            'status' => 'required|in:menunggu,disetujui,dikembalikan',
+            'status' => 'required|in:menunggu,disetujui,dikembalikan,ditolak',
         ]);
 
         $oldStatus = $peminjaman->status;
@@ -193,6 +191,12 @@ class PeminjamanController extends Controller
                 foreach ($barangList as $barang) {
                     $inventori = Inventory::find($barang['inventori_id']);
                     $inventori->increment('jumlah', $barang['jumlah_pinjam']);
+                }
+            }
+
+            if ($newStatus === 'ditolak' && $oldStatus !== 'ditolak') {
+                if ($peminjaman->email) {
+                    Mail::to($peminjaman->email)->send(new PeminjamanDitolakMail($peminjaman));
                 }
             }
 

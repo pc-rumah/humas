@@ -35,6 +35,8 @@
                                     Disetujui</option>
                                 <option value="dikembalikan" {{ $peminjaman->status == 'dikembalikan' ? 'selected' : '' }}>
                                     Dikembalikan</option>
+                                <option value="ditolak" {{ $peminjaman->status == 'ditolak' ? 'selected' : '' }}>
+                                    Ditolak</option>
                             </select>
                         </div>
 

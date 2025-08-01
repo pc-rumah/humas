@@ -57,6 +57,10 @@
                                 <span class="badge bg-primary text-white text-capitalize">{{ $peminjaman->status }}</span>
                             @break
 
+                            @case('ditolak')
+                                <span class="badge bg-danger text-white text-capitalize">{{ $peminjaman->status }}</span>
+                            @break
+
                             @default
                                 <span class="badge bg-secondary text-white">{{ $peminjaman->status }}</span>
                         @endswitch
@@ -66,7 +70,7 @@
                     <div class="mt-3">
                         <img src="{{ asset('storage/' . $peminjaman->ktm) }}" alt="KTM" class="img-thumbnail"
                             style="max-width: 200px;">
-                        <div class="text-muted small mt-1">KTM</div>
+                        <div class="text-muted small mt-1">KTM/ID Card</div>
                     </div>
                 @endif
                 @if (isset($peminjaman->upload_surat))
