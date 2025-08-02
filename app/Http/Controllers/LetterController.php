@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LetterRequest;
 use App\Models\Letter;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 
 class LetterController extends Controller
@@ -17,13 +17,13 @@ class LetterController extends Controller
 
     public function index()
     {
-        $letter = Letter::where('status', 'menunggu')->get();
+        $letter = Letter::where('status', 'menunggu')->paginate(5);
         return view('letter.index', compact('letter'));
     }
 
     public function create()
     {
-        // return view('letter.create');
+        //
     }
 
     public function store(Request $request)
@@ -31,20 +31,9 @@ class LetterController extends Controller
         //
     }
 
-    public function storeUser(Request $request)
+    public function storeUser(LetterRequest $request)
     {
-        $validated = $request->validate([
-            'nama_pemohon'             => 'required|string|max:255',
-            'nama_kegiatan'           => 'required|string|max:255',
-            'instansi'                => 'required|string|max:255',
-            'tanggal_mulai_kegiatan'  => 'required|date',
-            'tanggal_selesai_kegiatan' => 'nullable|date|after_or_equal:tanggal_mulai_kegiatan',
-            'waktu_mulai_kegiatan'    => 'required|date_format:H:i',
-            'waktu_selesai_kegiatan' => 'nullable|string|max:10',
-            'lokasi_kegiatan'         => 'required|string|max:255',
-            'detail_foto'             => 'required|string|max:255',
-            'upload_surat'            => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:20480',
-        ]);
+        $validated = $request->validated();
 
         if (
             $request->waktu_selesai_kegiatan &&
@@ -117,7 +106,6 @@ class LetterController extends Controller
             return back()->with('error', 'Tidak ada surat yang diupload.');
         }
 
-        // Pakai disk 'public'
         if (!Storage::disk('public')->exists($letter->upload_surat)) {
             return back()->with('error', 'File tidak ditemukan.');
         }

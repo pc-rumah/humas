@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InventoryRequest;
+use App\Http\Requests\UpdateInventory;
 use App\Models\Inventory;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -23,7 +25,7 @@ class InventoryController extends Controller
         if ($request->filled('search')) {
             $query->where('nama_barang', 'like', '%' . $request->search . '%');
         }
-        $data = $query->paginate(10);
+        $data = $query->paginate(5);
 
         return view('inventory.index', compact('data'));
     }
@@ -34,17 +36,9 @@ class InventoryController extends Controller
         return view("inventory.create", compact("kategori"));
     }
 
-    public function store(Request $request)
+    public function store(InventoryRequest $request)
     {
-        $validated = $request->validate([
-            'nama_barang'   => 'required',
-            'deskripsi'     => 'nullable|string',
-            'kategori_id'   => 'required|exists:kategori,id',
-            'jumlah'        => 'required|integer|min:0',
-            'lokasi'        => 'nullable',
-            'status'        => 'required|in:tersedia,dipinjam,rusak',
-            'gambar_barang' => 'required|image|mimes:jpg,jpeg,png|max:4096',
-        ]);
+        $validated = $request->validated();
 
         $category = Kategori::findOrFail($validated['kategori_id']);
         $count = Inventory::where('kategori_id', $category->id)->count() + 1;
@@ -61,28 +55,15 @@ class InventoryController extends Controller
         return redirect()->route('inventori.index')->with('success', 'Barang berhasil ditambahkan.');
     }
 
-    public function show(Inventory $inventory)
-    {
-        //
-    }
-
     public function edit(Inventory $inventori)
     {
         $kategori = Kategori::all();
         return view('inventory.edit', compact('inventori', 'kategori'));
     }
 
-    public function update(Request $request, Inventory $inventori)
+    public function update(UpdateInventory $request, Inventory $inventori)
     {
-        $validated = $request->validate([
-            'nama_barang' => 'required',
-            'deskripsi' => 'nullable|string',
-            'kategori_id' => 'required|exists:kategori,id',
-            'jumlah' => 'required|integer|min:0',
-            'lokasi' => 'nullable',
-            'status' => 'required|in:tersedia,dipinjam,rusak',
-            'gambar_barang' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('gambar_barang')) {
             if ($inventori->gambar_barang && Storage::disk('public')->exists($inventori->gambar_barang)) {

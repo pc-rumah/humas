@@ -6,6 +6,16 @@
             <a class="btn btn-primary m-1" href="{{ route('inventori.create') }}">Tambah</a>
             @include('partdash.alert')
             <div class="table-responsive">
+
+                <form action="{{ route('inventori.index') }}" method="GET" class="mb-3 d-flex gap-2">
+                    <input type="text" name="search" class="form-control" placeholder="Cari nama barang..."
+                        value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                    @if (request('search'))
+                        <a href="{{ route('inventori.index') }}" class="btn btn-secondary">Reset</a>
+                    @endif
+                </form>
+
                 <table class="table text-nowrap mb-0 align-middle">
                     <thead class="text-dark fs-4">
                         <tr>
@@ -47,7 +57,7 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">{{ $loop->iteration }}</h6>
+                                        <h6 class="fw-semibold mb-0">{{ $data->firstItem() + $loop->index }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">{{ $item->kode_barang }}</h6>
@@ -89,6 +99,7 @@
                             @endforeach
                         @endif
                     </tbody>
+                    {{ $data->links() }}
                 </table>
             </div>
         </div>

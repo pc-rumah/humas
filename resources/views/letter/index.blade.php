@@ -83,6 +83,7 @@
                             @endforeach
                         @endif
                     </tbody>
+                    {{ $letter->links() }}
                 </table>
             </div>
         </div>

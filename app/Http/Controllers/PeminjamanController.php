@@ -76,8 +76,7 @@ class PeminjamanController extends Controller
 
     public function create()
     {
-        $inventori = Inventory::where('jumlah', '>', 0)->get();
-        return view('peminjaman.create', compact('inventori'));
+        //
     }
 
     public function store(Request $request)
@@ -97,7 +96,6 @@ class PeminjamanController extends Controller
 
                 $inventory = Inventory::findOrFail($inventoriId);
 
-                // Validasi stok tersedia
                 if ($jumlahPinjam > $inventory->jumlah) {
                     throw \Illuminate\Validation\ValidationException::withMessages([
                         "jumlah_pinjam.{$index}" => "Jumlah pinjam melebihi stok tersedia untuk barang: {$inventory->nama_barang}",

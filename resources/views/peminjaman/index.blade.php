@@ -5,12 +5,15 @@
         <div class="card-body p-4">
             <a class="btn btn-secondary m-1" href="{{ route('peminjaman.export') }}">Export PDF</a>
             <a class="btn btn-warning m-1" href="{{ route('peminjaman.export.excel') }}">Export EXCEL</a>
+
             <form method="GET" class="row g-3 mb-4">
                 <div class="col-md-2">
                     <select name="status" class="form-control">
                         <option value="">-- Status --</option>
                         <option value="menunggu" {{ request('status') == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
                         <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui
+                        </option>
+                        <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak
                         </option>
                         <option value="dikembalikan" {{ request('status') == 'dikembalikan' ? 'selected' : '' }}>
                             Dikembalikan
@@ -34,7 +37,9 @@
                     <a href="{{ route('peminjaman.index') }}" class="btn btn-secondary">Reset</a>
                 </div>
             </form>
+
             @include('partdash.alert')
+
             <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle">
                     <thead class="text-dark fs-4">
@@ -56,11 +61,12 @@
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Tanggal Kembali</h6>
-
-                                @if (Auth::user()->hasRole('admin'))
-                            <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Aksi</h6>
                             </th>
+
+                            @if (Auth::user()->hasRole('admin'))
+                                <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Aksi</h6>
+                                </th>
                             @endif
                         </tr>
                     </thead>
@@ -128,6 +134,7 @@
                             @endforeach
                         @endif
                     </tbody>
+                    {{ $data->links() }}
                 </table>
             </div>
         </div>

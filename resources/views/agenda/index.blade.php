@@ -75,6 +75,7 @@
                             @endforeach
                         @endif
                     </tbody>
+                    {{ $agenda->links() }}
                 </table>
             </div>
         </div>

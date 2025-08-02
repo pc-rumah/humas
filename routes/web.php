@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\KategoriNewsController;
 use App\Http\Controllers\LetterController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ShowNewsAgendaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
 Route::get('/', [WelcomeController::class, 'index']);
@@ -38,9 +37,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('kategori', KategoriController::class);
     Route::resource('inventori', InventoryController::class);
-    Route::resource('kategorinews', KategoriNewsController::class);
     Route::get('/export-peminjaman', [PeminjamanController::class, 'exportPDF'])->name('peminjaman.export');
     Route::get('/export-peminjaman-excel', [PeminjamanController::class, 'exportExcel'])->name('peminjaman.export.excel');
+    Route::resource('muser', UserController::class);
 });
 
 Route::middleware(['auth', 'role:petugas'])->group(function () {
@@ -49,7 +48,6 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 Route::middleware(['auth', 'role:admin|petugas'])->group(function () {
     Route::resource('peminjaman', PeminjamanController::class);
-    Route::resource('news', NewsController::class);
     Route::resource('agenda', AgendaController::class);
     Route::resource('letter', LetterController::class);
     Route::get('/letter/download/{id}', [LetterController::class, 'download'])->name('letter.download');

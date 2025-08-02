@@ -3,19 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\News;
-use App\Models\Agenda;
 use App\Models\Letter;
-use App\Models\KategoriNews;
 use Illuminate\Http\Request;
 
 class ShowNewsAgendaController extends Controller
 {
     public function home(Request $request)
     {
-        $news = News::all();
-        $kategori = KategoriNews::all();
-
         $agenda = Letter::where('status', 'disetujui');
 
         $filter = $request->get('filter');
@@ -35,6 +29,6 @@ class ShowNewsAgendaController extends Controller
 
         $agenda = $agenda->orderBy('tanggal_mulai_kegiatan', 'desc')->get();
 
-        return view('welpage.newsagen', compact('news', 'agenda', 'kategori'));
+        return view('welpage.newsagen', compact('agenda'));
     }
 }
