@@ -28,7 +28,6 @@ class PeminjamanExport implements FromCollection, WithHeadings
                 'tanggal_pinjam'   => $item->tanggal_pinjam,
                 'tanggal_kembali'  => $item->tanggal_kembali,
                 'status'           => $item->status,
-                'catatan'          => $item->tujuan,
             ];
         });
     }

@@ -35,7 +35,6 @@
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
                 <th>Status</th>
-                <th>Tujuan</th>
             </tr>
         </thead>
         <tbody>
@@ -60,7 +59,6 @@
                     <td>{{ $item->tanggal_pinjam }}</td>
                     <td>{{ $item->tanggal_kembali }}</td>
                     <td>{{ $item->status }}</td>
-                    <td>{{ $item->tujuan }}</td>
                 </tr>
             @endforeach
         </tbody>

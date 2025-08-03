@@ -181,7 +181,7 @@
                                 </div>
 
                                 <div class="history-item-details">
-                                    <div class="history-item-purpose">Tujuan: {{ $item->tujuan }}</div>
+                                    <div class="history-item-purpose">Peminjam: {{ $item->nama_peminjam }}</div>
                                 </div>
                             </div>
                         @empty
