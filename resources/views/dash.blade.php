@@ -94,6 +94,12 @@
                                                     <h6 class="fw-semibold mb-0">Nama Kegiatan</h6>
                                                 </th>
                                                 <th class="border-bottom-0">
+                                                    <h6 class="fw-semibold mb-0">No HP</h6>
+                                                </th>
+                                                <th class="border-bottom-0">
+                                                    <h6 class="fw-semibold mb-0">Email</h6>
+                                                </th>
+                                                <th class="border-bottom-0">
                                                     <h6 class="fw-semibold mb-0">Status</h6>
                                                 </th>
                                                 <th class="border-bottom-0">
@@ -115,6 +121,12 @@
                                                     </td>
                                                     <td class="border-bottom-0">
                                                         <p class="mb-0 fw-normal">{{ $item->nama_kegiatan }}</p>
+                                                    </td>
+                                                    <td class="border-bottom-0">
+                                                        <p class="mb-0 fw-normal"> {{ $item->no_telp }}</p>
+                                                    </td>
+                                                    <td class="border-bottom-0">
+                                                        <p class="mb-0 fw-normal"> {{ $item->email }}</p>
                                                     </td>
                                                     <td class="border-bottom-0">
                                                         <div class="d-flex align-items-center gap-2">
@@ -217,7 +229,11 @@
                                                     </td>
                                                 </tr>
                                             @empty
-                                                <h4>tidak ada data</h4>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <h4 class="text-center">Tidak ada data</h4>
+                                                    </td>
+                                                </tr>
                                             @endforelse
                                         </tbody>
                                     </table>
