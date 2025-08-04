@@ -139,7 +139,7 @@ body {
 
 /* Hero Carousel Section */
 .hero-carousel {
-    margin-top: 70px;
+    margin-top: 100px;
     height: 600px;
     position: relative;
 }
@@ -166,7 +166,9 @@ body {
 
 @media (max-width: 768px) {
     .hero-carousel {
+        margin-top: 50px;
         height: auto;
+        margin-bottom: -100px;
     }
     .swiper-slide img {
         max-width: 100%;
@@ -294,8 +296,14 @@ body {
 
 /* Services Section */
 .services {
-    padding: 80px 0;
+    padding: 20px 0;
     background: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    /* .services {
+        display: none;
+    } */
 }
 
 .section-header {

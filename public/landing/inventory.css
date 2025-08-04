@@ -147,7 +147,7 @@
     letter-spacing: 0.5px;
 }
 
-.stock-badge.in-stock {
+.stock-badge.adastock {
     background: #e8f5e8;
     color: #2d7d32;
 }
@@ -157,7 +157,7 @@
     color: #f57c00;
 }
 
-.stock-badge.out-of-stock {
+.stock-badge.tidakadastok {
     background: #ffebee;
     color: #d32f2f;
 }

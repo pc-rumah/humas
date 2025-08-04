@@ -25,23 +25,19 @@
                 function getStockStatus($jumlah)
                 {
                     if ($jumlah == 0) {
-                        return 'out-of-stock';
+                        return 'tidakadastok';
                     }
-                    if ($jumlah <= 2) {
-                        return 'low-stock';
-                    }
-                    return 'in-stock';
+
+                    return 'adastock';
                 }
 
                 function getStockText($jumlah)
                 {
                     if ($jumlah == 0) {
-                        return 'Out of Stock';
+                        return 'Tidak ada stok';
                     }
-                    if ($jumlah <= 2) {
-                        return 'Low Stock';
-                    }
-                    return 'In Stock';
+
+                    return 'Ada Stock';
                 }
             @endphp
             <!-- Search and Filter -->
@@ -79,12 +75,7 @@
                                     <span class="item-category">Kategori: {{ $item->kategori->nama_kategori }}</span>
                                     <span class="item-stock">Stok: {{ $item->jumlah }}</span>
                                 </div>
-                                <div class="item-condition condition-{{ strtolower($item->status) }}">
-                                    <span>Kondisi: {{ $item->status }}</span>
-                                    @if ($item->jumlah <= 2 && $item->jumlah > 0)
-                                        <span class="warning-icon">⚠️</span>
-                                    @endif
-                                </div>
+
                             </div>
                         </div>
                     @empty

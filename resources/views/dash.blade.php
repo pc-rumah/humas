@@ -196,6 +196,9 @@
                                                     <h6 class="fw-semibold mb-0">Instansi</h6>
                                                 </th>
                                                 <th class="border-bottom-0">
+                                                    <h6 class="fw-semibold mb-0">Liputan</h6>
+                                                </th>
+                                                <th class="border-bottom-0">
                                                     <h6 class="fw-semibold mb-0">Tanggal Mulai Kegiatan</h6>
                                                 </th>
                                                 <th class="border-bottom-0">
@@ -217,6 +220,9 @@
                                                     </td>
                                                     <td class="border-bottom-0">
                                                         <p class="mb-0 fw-normal"> {{ $item->instansi }}</p>
+                                                    </td>
+                                                    <td class="border-bottom-0">
+                                                        <p class="mb-0 fw-normal"> {{ $item->detail_foto }}</p>
                                                     </td>
                                                     <td class="border-bottom-0">
                                                         <p class="mb-0 fw-normal">
