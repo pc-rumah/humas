@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Inventaris</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="shortcut icon" type="image/png" href="{{ asset('dash/assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('dash/assets/images/logos/favicon.webp') }}" />
     <link rel="stylesheet" href="{{ asset('landing/inventory.css') }}">
 </head>
 
@@ -27,7 +27,6 @@
                     if ($jumlah == 0) {
                         return 'tidakadastok';
                     }
-
                     return 'adastock';
                 }
 
@@ -36,7 +35,6 @@
                     if ($jumlah == 0) {
                         return 'Tidak ada stok';
                     }
-
                     return 'Ada Stock';
                 }
             @endphp

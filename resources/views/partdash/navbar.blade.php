@@ -4,7 +4,7 @@
             <a href="#" class="b-brand flex items-center gap-3">
                 <img src="{{ asset('dash/assets/images/logo-white.svg') }}" class="img-fluid logo logo-lg"
                     alt="logo" />
-                <img src="{{ asset('dash/assets/images/favicon.svg') }}" class="img-fluid logo logo-sm" alt="logo" />
+                <img src="{{ asset('dash/assets/images/favicon.webp') }}" class="img-fluid logo logo-sm" alt="logo" />
             </a>
         </div>
         <div class="navbar-content h-[calc(100vh_-_74px)] py-2.5">

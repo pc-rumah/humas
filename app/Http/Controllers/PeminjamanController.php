@@ -18,7 +18,7 @@ class PeminjamanController extends Controller
 {
     public function home()
     {
-        $peminjaman = Peminjaman::latest()->get();
+        $peminjaman = Peminjaman::where('status', 'menunggu')->latest()->take(8)->get();
 
         $inventori = Inventory::where('jumlah', '>', 0)
             ->where('status', 'tersedia')

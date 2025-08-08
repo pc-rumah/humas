@@ -2,7 +2,7 @@
     <div class="container">
         <div class="logo" style="display: flex; align-items: center; gap: 8px;">
             <span class="logo-icon">
-                <img src="{{ asset('logo.png') }}" alt="logo" style="width: 32px; height: 32px; object-fit: contain;">
+                <img src="{{ asset('logo.webp') }}" alt="logo" style="width: 32px; height: 32px; object-fit: contain;">
             </span>
             <span class="logo-text">Layanan Humas</span>
         </div>

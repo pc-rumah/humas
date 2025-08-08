@@ -3,7 +3,7 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="#" class="text-nowrap logo-img">
-                <img src="{{ asset('dash/assets/images/logos/logo-humas.png') }}" width="180" alt="" />
+                <img src="{{ asset('dash/assets/images/logos/logo-humas.webp') }}" width="180" alt="" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8"></i>
@@ -80,24 +80,6 @@
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Agenda</span>
                 </li>
-                {{-- <li class="sidebar-item">
-                    <a class="sidebar-link {{ Request::is('kategorinews.*') ? 'active' : '' }}"
-                        href="{{ route('kategorinews.index') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-article"></i>
-                        </span>
-                        <span class="hide-menu">Kategori Agenda</span>
-                    </a>
-                </li> --}}
-                {{-- <li class="sidebar-item">
-                    <a class="sidebar-link {{ Request::is('news*') ? 'active' : '' }}" href="{{ route('news.index') }}"
-                        aria-expanded="false">
-                        <span>
-                            <i class="ti ti-article"></i>
-                        </span>
-                        <span class="hide-menu">News</span>
-                    </a>
-                </li> --}}
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ Request::is('agenda*') ? 'active' : '' }}"
                         href="{{ route('agenda.index') }}" aria-expanded="false">

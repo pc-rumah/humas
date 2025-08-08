@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="shortcut icon" type="image/png" href="{{ asset('dash/assets/images/logos/favicon.webp') }}" />
     <link rel="stylesheet" href="{{ asset('landing/news-agenda.css') }}">
 </head>
 

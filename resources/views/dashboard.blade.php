@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('dash/assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('dash/assets/images/logos/favicon.webp') }}" />
     <link rel="stylesheet" href="{{ asset('dash/assets/css/styles.min.css') }}" />
 </head>
 

@@ -54,7 +54,7 @@
                                 <h6 class="fw-semibold mb-0">Nama Barang</h6>
                             </th>
                             <th class="border-bottom-0">
-                                <h6 class="fw-semibold mb-0">Nama Kegiatan</h6>
+                                <h6 class="fw-semibold mb-0">Status</h6>
                             </th>
                             <th class="border-bottom-0">
                                 <h6 class="fw-semibold mb-0">Tanggal Pinjam</h6>
@@ -95,7 +95,7 @@
                                         </h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $item->nama_kegiatan }}</h6>
+                                        <h6 class="fw-semibold mb-1">{{ $item->status }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1">
@@ -110,24 +110,14 @@
                                             <a href="{{ route('peminjaman.show', $item) }}"
                                                 class="btn btn-warning btn-sm">Detail</a>
                                             @if (Auth::user()->hasRole('admin'))
-                                                @if ($item->status != 'dikembalikan' && $item->status != 'ditolak')
-                                                    <a href="{{ route('peminjaman.edit', $item) }}"
-                                                        class="btn btn-warning btn-sm">Edit</a>
-                                                @else
-                                                    <button class="btn btn-warning btn-sm" disabled>Edit</button>
-                                                @endif
+                                                <a href="{{ route('peminjaman.edit', $item) }}"
+                                                    class="btn btn-warning btn-sm">Edit</a>
 
-                                                @if ($item->status != 'dikembalikan' && $item->status != 'ditolak')
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        data-bs-toggle="modal"
-                                                        data-url="{{ route('peminjaman.destroy', $item->id) }}"
-                                                        data-bs-target="#alert-hapus">Hapus</button>
-                                                @else
-                                                    <button class="btn btn-danger btn-sm" disabled="disabled">Hapus</button>
-                                                @endif
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                    data-url="{{ route('peminjaman.destroy', $item->id) }}"
+                                                    data-bs-target="#alert-hapus">Hapus</button>
                                             @endif
                                         </div>
-
                                         @include('partdash.modal')
                                     </td>
                                 </tr>

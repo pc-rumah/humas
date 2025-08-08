@@ -55,7 +55,7 @@
                             </td>
                         @else
                             @foreach ($data as $item)
-                                <tr>
+                                <tr style="border-bottom: 1px solid #b5b4b4;">
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">{{ $data->firstItem() + $loop->index }}</h6>
                                     </td>

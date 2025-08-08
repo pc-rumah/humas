@@ -166,7 +166,7 @@ body {
 
 @media (max-width: 768px) {
     .hero-carousel {
-        margin-top: 50px;
+        margin-top: 15px;
         height: auto;
         margin-bottom: -100px;
     }
